@@ -1,28 +1,12 @@
 import Image from 'next/image';
 import styles from './page.module.css';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '@/shared/providers/firebase';
 import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
-import { GoogleBtn } from './login/(ui)/google-btn';
-import { AppleBtn } from './login/(ui)/apple-btn';
-import { FacebookBtn } from './login/(ui)/facebook-btn';
+import { GoogleBtn } from './(ui)/google-btn';
+import { AppleBtn } from './(ui)/apple-btn';
+import { FacebookBtn } from './(ui)/facebook-btn';
 
-//TODO: middleware 작업하기
-export default function Home() {
-  // const test = async () => {
-  //   try {
-  //     const docRef = await addDoc(collection(db, 'users'), {
-  //       first: 'Ada',
-  //       last: 'Lovelace',
-  //       born: 1815,
-  //     });
-  //     console.log('Document written with ID: ', docRef.id);
-  //   } catch (e) {
-  //     console.error('Error adding document: ', e);
-  //   }
-  // };
-
+export default function Login() {
   return (
     <main className={styles.main}>
       <div className={styles.logo}>
