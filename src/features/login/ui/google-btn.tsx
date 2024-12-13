@@ -47,7 +47,7 @@ export const GoogleBtn = () => {
       const result = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: {
           Authorization: `Bearer ${token}`,
-          redirect_uri: 'postmessage',
+          redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/login' : 'https://soliserium.vercel.app/login',
         },
       });
 
