@@ -18,6 +18,11 @@ const hakgyoansim = localFont({
   variable: '--font-hakgyoansim',
 });
 
+export const metadata: Metadata = {
+  title: 'Soliserium',
+  description: '위로와 안식을 주는 공간',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
