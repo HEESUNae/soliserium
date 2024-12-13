@@ -5,11 +5,10 @@ import { Button } from '@/shared';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import styles from './google-btn.module.css';
 
 export const GoogleBtn = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const { setUserAuth } = useUserAuthStore();
 
   // const googleLogin = () => {
@@ -45,7 +44,7 @@ export const GoogleBtn = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
       const token = res.access_token;
-      const result: any = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
+      const result = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: {
           Authorization: `Bearer ${token}`,
           redirect_uri: 'postmessage',
