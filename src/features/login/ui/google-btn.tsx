@@ -44,10 +44,20 @@ export const GoogleBtn = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
       const token = res.access_token;
+      console.log('res', res);
+
+      // const url = `https://accounts.google.com/o/oauth2/v2/auth?
+      // scope=https%3A//www.googleapis.com/auth/drive.metadata.readonly%20https%3A//www.googleapis.com/auth/calendar.readonly&
+      // include_granted_scopes=true&
+      // response_type=${token}&
+      // state=state_parameter_passthrough_value&
+      // redirect_uri=${process.env.NODE_ENV === 'development' ? 'http://localhost:3000/login' : 'https://soliserium.vercel.app/login'}&
+      // client_id=${process.env.NEXT_PUBLIC_GOOGLE_KEY}`;
+
       const result = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: {
           Authorization: `Bearer ${token}`,
-          redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/login' : 'https://soliserium.vercel.app/login',
+          // redirectUri: process.env.NODE_ENV === 'development' ? 'http://localhost:3000/login' : 'https://soliserium.vercel.app/login',
         },
       });
 
