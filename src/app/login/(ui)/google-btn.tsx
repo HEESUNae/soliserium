@@ -6,11 +6,11 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import styles from './google-btn.module.css';
 import { Button } from '@/shared/ui/button';
 import { auth } from '@/shared/providers/firebase';
-import { useUserAuth } from '../../../entities/auth/model/user-auth-store';
+import { useUserAuthStore } from '../../../entities/auth/model/user-auth-store';
 
 export const GoogleBtn = () => {
   const router = useRouter();
-  const { setUserAuth } = useUserAuth();
+  const { setUserAuth } = useUserAuthStore();
 
   const handleSignIn = async () => {
     try {

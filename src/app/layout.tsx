@@ -1,13 +1,19 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { Header } from '@/widgets/header';
 
 const pretendard = localFont({
   src: '../shared/fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
   variable: '--font-pretendard',
+});
+
+const hakgyoansim = localFont({
+  src: '../shared/fonts/Hakgyoansim-Dunggeunmiso-Bold.otf',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-hakgyoansim',
 });
 
 export default function RootLayout({
@@ -17,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable}`}>{children}</body>
+      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>{children}</body>
     </html>
   );
 }

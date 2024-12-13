@@ -2,34 +2,11 @@
   height: 100vh;
   padding: 0 4rem;
 }
-.form {
-  width: 100%;
-}
-.form input {
-  width: 100%;
-  margin-bottom: 1rem;
-}
 .logo {
   text-align: center;
   margin-bottom: 2rem;
-}
-.authBtnWrap {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  gap: 1rem;
-  margin-top: 1.4rem;
-  width: 100%;
-}
-.authBtnWrap button {
-  font-size: 1.2rem;
-}
-.authBtnWrap .idSave {
-  display: flex;
-  align-items: center;
-  flex-grow: 2;
-  gap: 0.4rem;
-  font-size: 1.2rem;
+  font-family: var(--font-hakgyoansim);
+  font-size: 3rem;
 }
 .snsBtnsWrap {
   margin-top: 5rem;
