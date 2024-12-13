@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { AuthProvider } from '@/shared/providers/auth-provider';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const pretendard = localFont({
   src: '../shared/fonts/PretendardVariable.woff2',
@@ -23,7 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>{children}</body>
+      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY as string}>
+          <AuthProvider>{children}</AuthProvider>
+        </GoogleOAuthProvider>
+      </body>
     </html>
   );
 }

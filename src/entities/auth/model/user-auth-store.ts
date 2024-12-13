@@ -2,23 +2,23 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 interface UserInfo {
-  displayName?: string;
+  name?: string;
   email?: string;
   photoURL?: string;
   providerId?: string;
-  uid?: string;
+  id?: string;
 }
 
 interface AuthState {
-  userInfo: UserInfo;
+  userAuth: UserInfo;
   setUserAuth: (userInfo: UserInfo) => void;
 }
 
 export const useUserAuthStore = create(
   persist<AuthState>(
     (set) => ({
-      userInfo: [],
-      setUserAuth: (userInfo: UserInfo) => set(() => ({ userInfo })),
+      userAuth: {},
+      setUserAuth: (userInfo: UserInfo) => set(() => ({ userAuth: userInfo })),
     }),
     {
       name: 'auth-user',

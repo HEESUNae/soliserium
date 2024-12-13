@@ -1,11 +1,11 @@
 import styles from './page.module.css';
-import { AppleBtn, FacebookBtn, GoogleBtn } from '.';
-import { LoginForm } from '@/widgets/login-form';
+import { GoogleBtn, LoginForm, FacebookBtn, AppleBtn } from '@/features';
+import { Logo } from '@/widgets';
 
 export default function Login() {
   return (
     <main className={styles.main}>
-      <div className={styles.logo}>Soliserium</div>
+      <Logo size="big" />
       <LoginForm />
       <div className={styles.snsBtnsWrap}>
         <GoogleBtn />

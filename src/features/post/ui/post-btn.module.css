@@ -1,0 +1,6 @@
+.postBtn {
+  margin: 1.6rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  border: 0.1rem solid var(--color-gray);
+}

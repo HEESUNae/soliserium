@@ -1,6 +1,8 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   padding: 1.2rem;
-  border-bottom: 0.1rem solid #ddd;
+  border-bottom: 0.1rem solid var(--color-lightGray);
+  height: 6rem;
 }

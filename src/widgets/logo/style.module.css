@@ -1,0 +1,10 @@
+.bigLogo {
+  text-align: center;
+  font-family: var(--font-hakgyoansim);
+  font-size: 3rem;
+}
+.logo {
+  text-align: center;
+  font-family: var(--font-hakgyoansim);
+  font-size: 2rem;
+}
