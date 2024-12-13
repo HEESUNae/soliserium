@@ -14,7 +14,7 @@ export const LoginForm = () => {
   // 로그인
   const authLogin = (formData: FormData) => {
     try {
-      const userId = formData.get('userId')?.toString()!;
+      const userId = (formData.get('userId') || '').toString();
       checkIdSave(userId);
     } catch (e) {
       console.log(e);
