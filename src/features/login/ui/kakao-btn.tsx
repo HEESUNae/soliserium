@@ -15,7 +15,7 @@ declare global {
       Auth: {
         authorize(options: { redirectUri: string }): void;
         login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: unknown) => void }): void;
-        logout(callback?: () => void): void;
+        logout(callback?: () => void): Promise<void>;
         getAccessToken(): string | null;
         setAccessToken(token: string): void;
       };
