@@ -22,6 +22,7 @@ export const useGoogleAuth = () => {
 
         if (result) {
           const userData = {
+            accessToken: access_token,
             id: result.uid!,
             name: result.displayName!,
             email: result.email!,

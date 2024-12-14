@@ -1,8 +1,8 @@
 'use client';
 
-import { useUserAuthStore } from '@/entities';
-import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useUserAuthStore } from '@/entities';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (userAuth.name) {
+    if (userAuth.accessToken) {
       router.push('/main');
     } else {
       router.push('/login');

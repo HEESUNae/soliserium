@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { AuthProvider } from '@/shared/providers/auth-provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import Script from 'next/script';
 
 const pretendard = localFont({
   src: '../shared/fonts/PretendardVariable.woff2',
