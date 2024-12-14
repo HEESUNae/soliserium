@@ -19,3 +19,22 @@ export interface KakaoAuthResponse {
     thumbnail_image?: string;
   };
 }
+
+declare global {
+  interface Window {
+    Kakao: {
+      init(key: string): void;
+      isInitialized(): boolean;
+      Auth: {
+        authorize(options: { redirectUri: string }): void;
+        login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: unknown) => void }): void;
+        logout(callback?: () => void): Promise<void>;
+        getAccessToken(): string | null;
+        setAccessToken(token: string): void;
+      };
+      API: {
+        request: (options: { url: string }) => Promise<KakaoAuthResponse>;
+      };
+    };
+  }
+}

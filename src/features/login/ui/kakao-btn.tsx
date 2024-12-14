@@ -1,62 +1,15 @@
 'use client';
 
-import styles from './kakao-btn.module.css';
-import Script from 'next/script';
 import Image from 'next/image';
-import { useUserAuthStore } from '@/entities';
+import styles from './kakao-btn.module.css';
+import { useKakaoAuth } from '../hooks/kakao-auth';
 import { Button } from '@/shared';
-import { KakaoAuthResponse } from '../types/kakao-auth-type';
-
-declare global {
-  interface Window {
-    Kakao: {
-      init(key: string): void;
-      isInitialized(): boolean;
-      Auth: {
-        authorize(options: { redirectUri: string }): void;
-        login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: unknown) => void }): void;
-        logout(callback?: () => void): Promise<void>;
-        getAccessToken(): string | null;
-        setAccessToken(token: string): void;
-      };
-      API: {
-        request: (options: { url: string }) => Promise<KakaoAuthResponse>;
-      };
-    };
-  }
-}
+import { Loading } from '@/widgets';
 
 export const KakaoBtn = () => {
-  const { setUserAuth } = useUserAuthStore();
+  const { isLoading, kakaoLogin } = useKakaoAuth();
 
-  const kakaoLogin = async () => {
-    try {
-      if (window.Kakao && !window.Kakao.isInitialized()) {
-        window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY!);
-      }
-
-      window.Kakao.Auth.login({
-        success: async function (data: KakaoAuthResponse) {
-          const res = await window.Kakao.API.request({ url: '/v2/user/me' });
-          const { id, properties } = res;
-          const userData = {
-            accessToken: data.access_token,
-            id: id,
-            name: properties.nickname,
-            email: 'kakao',
-            photoURL: properties.profile_image,
-            providerId: 'kakao',
-          };
-          setUserAuth(userData);
-        },
-        fail: function (data: unknown) {
-          console.log('fail :', data);
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -66,7 +19,6 @@ export const KakaoBtn = () => {
           <p>Sign in with Kakao</p>
         </div>
       </Button>
-      <Script src="https://developers.kakao.com/sdk/js/kakao.js" />
     </>
   );
 };
