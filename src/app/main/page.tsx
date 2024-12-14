@@ -1,7 +1,6 @@
 'use client';
 
 import Script from 'next/script';
-import { useRouter } from 'next/navigation';
 import { useUserAuthStore } from '@/entities';
 import { PostBtn } from '@/features/post/ui/post-btn';
 

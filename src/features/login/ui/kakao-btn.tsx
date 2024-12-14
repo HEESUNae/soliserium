@@ -14,7 +14,7 @@ declare global {
       isInitialized(): boolean;
       Auth: {
         authorize(options: { redirectUri: string }): void;
-        login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: any) => void }): void;
+        login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: unknown) => void }): void;
         logout(callback?: () => void): void;
         getAccessToken(): string | null;
         setAccessToken(token: string): void;
