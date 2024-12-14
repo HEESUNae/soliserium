@@ -3,13 +3,13 @@
 import { useUserAuthStore } from '@/entities';
 import Image from 'next/image';
 import KakaoLogin from 'react-kakao-login';
-import styles from './facebook-btn.module.css';
+import styles from './kakao-btn.module.css';
 
-export const FacebookBtn = () => {
+export const KakaoBtn = () => {
   const { setUserAuth } = useUserAuthStore();
 
   const kakaoOnSuccess = async (data: any) => {
-    const idToken = data.response.access_token;
+    // const idToken = data.response.access_token;
     const result = data.profile;
 
     if (data) {
@@ -37,7 +37,7 @@ export const FacebookBtn = () => {
       render={({ onClick }) => {
         return (
           <div
-            className={styles.facebookBtn}
+            className={styles.kakaoBtn}
             onClick={(e) => {
               e.preventDefault();
               onClick();

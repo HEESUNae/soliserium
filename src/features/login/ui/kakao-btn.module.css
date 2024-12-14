@@ -1,4 +1,4 @@
-.facebookBtn {
+.kakaoBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   height: 4.5rem;
   border-radius: 0.4rem;
 }
-.facebookBtn p {
+.kakaoBtn p {
   color: #3c1212;
   font-size: 1.4rem;
 }
