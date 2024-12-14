@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (userAuth.email) {
+    if (userAuth.name) {
       router.push('/main');
     } else {
       router.push('/login');
