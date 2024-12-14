@@ -6,7 +6,7 @@ interface UserInfo {
   email?: string;
   photoURL?: string;
   providerId?: string;
-  id?: string;
+  id?: string | number;
 }
 
 interface AuthState {

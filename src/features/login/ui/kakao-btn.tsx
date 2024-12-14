@@ -5,26 +5,59 @@ import Image from 'next/image';
 import KakaoLogin from 'react-kakao-login';
 import styles from './kakao-btn.module.css';
 
+// export interface KakaoAuthResponse {
+//   profile: {
+//     connected_at: string;
+//     id: number;
+//     kakao_account: {
+//       profile?: {
+//         is_default_image: boolean;
+//         is_default_nickname: boolean;
+//         nickname: string;
+//         profile_image_url?: string;
+//         thumbnail_image_url?: string;
+//       };
+//       profile_image_needs_agreement: boolean;
+//       profile_nickname_needs_agreement: boolean;
+//     };
+//     properties: {
+//       nickname: string;
+//       profile_image?: string;
+//       thumbnail_image?: string;
+//     };
+//   };
+//   response: {
+//     access_token: string;
+//     expires_in: number;
+//     id_token: string;
+//     refresh_token: string;
+//     refresh_token_expires_in: number;
+//     scope: string;
+//     token_type: string;
+//   };
+// }
+
 export const KakaoBtn = () => {
   const { setUserAuth } = useUserAuthStore();
 
-  const kakaoOnSuccess = async (data: any) => {
+  const kakaoOnSuccess = (data: any) => {
     // const idToken = data.response.access_token;
-    const result = data.profile;
+    console.log('data', data);
+    const { profile } = data;
 
-    if (data) {
+    if (profile) {
       const userData = {
-        id: result.id!,
-        name: result.properties.nickname,
+        id: profile.id,
+        name: profile.properties.nickname,
         email: 'kakao',
-        photoURL: result.properties.profile_image,
+        photoURL: profile.properties.profile_image,
         providerId: 'kakao',
       };
       setUserAuth(userData);
     }
   };
 
-  const kakaoOnFailure = (error: any) => {
+  const kakaoOnFailure = (error: unknown) => {
     console.log(error);
   };
 
