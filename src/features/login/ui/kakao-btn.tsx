@@ -9,7 +9,20 @@ import { KakaoAuthResponse } from '../types/kakao-auth-type';
 
 declare global {
   interface Window {
-    Kakao: any;
+    Kakao: {
+      init(key: string): void;
+      isInitialized(): boolean;
+      Auth: {
+        authorize(options: { redirectUri: string }): void;
+        login(options: { success: (data: KakaoAuthResponse) => Promise<void>; fail: (error: any) => void }): void;
+        logout(callback?: () => void): void;
+        getAccessToken(): string | null;
+        setAccessToken(token: string): void;
+      };
+      API: {
+        request: (options: { url: string }) => Promise<KakaoAuthResponse>;
+      };
+    };
   }
 }
 
@@ -19,7 +32,7 @@ export const KakaoBtn = () => {
   const kakaoLogin = async () => {
     try {
       if (window.Kakao && !window.Kakao.isInitialized()) {
-        window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
+        window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY!);
       }
 
       window.Kakao.Auth.login({

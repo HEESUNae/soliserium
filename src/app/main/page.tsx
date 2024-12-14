@@ -6,7 +6,6 @@ import { useUserAuthStore } from '@/entities';
 import { PostBtn } from '@/features/post/ui/post-btn';
 
 export default function MainPage() {
-  const router = useRouter();
   const { userAuth, setUserAuth } = useUserAuthStore();
 
   const handleLogout = async () => {

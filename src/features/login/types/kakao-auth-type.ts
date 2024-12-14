@@ -1,5 +1,4 @@
 export interface KakaoAuthResponse {
-  // profile: {
   access_token: string;
   connected_at: string;
   id: number;
@@ -20,13 +19,3 @@ export interface KakaoAuthResponse {
     thumbnail_image?: string;
   };
 }
-// response: {
-//   access_token: string;
-//   expires_in: number;
-//   id_token: string;
-//   refresh_token: string;
-//   refresh_token_expires_in: number;
-//   scope: string;
-//   token_type: string;
-// };
-// }
