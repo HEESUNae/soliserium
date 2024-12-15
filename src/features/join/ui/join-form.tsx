@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useActionState, useEffect } from 'react';
 import { authJoinAction } from '../actions/auth-join-action';
 import styles from './join-form.module.css';
-import { join } from 'path';
 
 export const JoinForm = () => {
   const [joinData, formAction] = useActionState(authJoinAction, null);
