@@ -8,7 +8,6 @@ export const useKakaoAuth = () => {
 
   const kakaoLogin = async () => {
     try {
-      setIsLoading(true);
       const { Kakao } = window;
 
       // kakao sdk 리셋
@@ -19,6 +18,7 @@ export const useKakaoAuth = () => {
       // 로그인
       Kakao.Auth.login({
         success: async function (data: KakaoAuthResponse) {
+          setIsLoading(true);
           const res = await Kakao.API.request({ url: '/v2/user/me' });
           const { id, properties } = res;
           const userData = {

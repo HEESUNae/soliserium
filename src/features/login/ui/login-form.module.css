@@ -15,12 +15,12 @@
   width: 100%;
 }
 .authBtnWrap a {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 .authBtnWrap .idSave {
   display: flex;
   align-items: center;
   flex-grow: 2;
   gap: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }

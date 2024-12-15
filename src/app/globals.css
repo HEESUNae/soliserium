@@ -30,6 +30,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+main {
+  padding: 2.4rem 2.4rem;
+}
 @media (min-width: 700px) {
   body {
     width: 35rem;
