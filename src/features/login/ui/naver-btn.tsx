@@ -16,33 +16,35 @@ export const NaverBtn = () => {
   const checkNaverSdk = () => {
     try {
       const { naver } = window;
-      const naverLogin = new naver.LoginWithNaverId({
-        clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!,
-        callbackUrl: process.env.NEXT_PUBLIC_HOST_URL! + 'login',
-        isPopup: false,
-        loginButton: { color: 'white', type: 2, height: '45' },
-      });
-      naverLogin.init();
-      console.log('prev', naverLogin);
-      naverLogin.getLoginStatus((status) => {
-        if (status) {
-          console.log('status', status);
-          setIsLoading(true);
-          const { id, email, nickname, profile_image } = naverLogin.user;
-          console.log('naverLogin', naverLogin);
-          const userData = {
-            accessToken: naverLogin.accessToken.accessToken,
-            id: id,
-            name: nickname,
-            email: email,
-            photoURL: profile_image,
-            providerId: 'naver',
-          };
-          setUserAuth(userData);
-          setIsLoading(false);
-          router.push('/main');
-        }
-      });
+      if (naver.LoginWithNaverId) {
+        const naverLogin = new naver.LoginWithNaverId({
+          clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!,
+          callbackUrl: process.env.NEXT_PUBLIC_HOST_URL! + 'login',
+          isPopup: false,
+          loginButton: { color: 'white', type: 2, height: '45' },
+        });
+        naverLogin.init();
+        console.log('prev', naverLogin);
+        naverLogin.getLoginStatus((status) => {
+          if (status) {
+            console.log('status', status);
+            setIsLoading(true);
+            const { id, email, nickname, profile_image } = naverLogin.user;
+            console.log('naverLogin', naverLogin);
+            const userData = {
+              accessToken: naverLogin.accessToken.accessToken,
+              id: id,
+              name: nickname,
+              email: email,
+              photoURL: profile_image,
+              providerId: 'naver',
+            };
+            setUserAuth(userData);
+            setIsLoading(false);
+            router.push('/main');
+          }
+        });
+      }
     } catch (e) {
       setIsLoading(false);
       console.log(e);
