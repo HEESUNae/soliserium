@@ -1,3 +1,4 @@
+// @ts-nocheck
 !(function (t, n) {
   'object' == typeof exports && 'object' == typeof module
     ? (module.exports = n())

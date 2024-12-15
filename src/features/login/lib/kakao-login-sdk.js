@@ -104,7 +104,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * ``````````
  */
-
+// @ts-nocheck
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined'
     ? factory(exports)
