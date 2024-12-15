@@ -19,7 +19,7 @@ export const NaverBtn = () => {
       if (naver.LoginWithNaverId) {
         const naverLogin = new naver.LoginWithNaverId({
           clientId: process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!,
-          callbackUrl: process.env.NEXT_PUBLIC_HOST_URL! + '/login',
+          callbackUrl: process.env.NEXT_PUBLIC_HOST_URL!,
           isPopup: false,
           loginButton: { color: 'white', type: 2, height: '45' },
         });
