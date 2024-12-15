@@ -24,10 +24,9 @@ export const NaverBtn = () => {
           loginButton: { color: 'white', type: 2, height: '45' },
         });
         naverLogin.init();
-        console.log('prev', naverLogin);
+
         naverLogin.getLoginStatus((status) => {
           if (status) {
-            console.log('status', status);
             setIsLoading(true);
             const { id, email, nickname, profile_image } = naverLogin.user;
             console.log('naverLogin', naverLogin);
