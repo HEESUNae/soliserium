@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export const useGoogleAuth = () => {
-  const { userAuth, setUserAuth } = useUserAuthStore();
+  const { setUserAuth } = useUserAuthStore();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
