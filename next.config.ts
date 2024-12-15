@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: 'k.kakaocdn.net',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'phinf.pstatic.net',
+        port: '',
+      },
     ],
   },
 };

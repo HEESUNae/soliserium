@@ -1,13 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import styles from './post-btn.module.css';
 import { useUserAuthStore } from '@/entities';
+import styles from './post-btn.module.css';
 
 export const PostBtn = () => {
   const { userAuth } = useUserAuthStore();
 
-  if (!userAuth.photoURL) return <></>;
+  if (!userAuth) return <></>;
 
   return (
     <div className={styles.postBtn}>

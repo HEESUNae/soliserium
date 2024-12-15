@@ -1,5 +1,5 @@
 import styles from './page.module.css';
-import { GoogleBtn, LoginForm, KakaoBtn, AppleBtn } from '@/features';
+import { GoogleBtn, LoginForm, KakaoBtn, NaverBtn } from '@/features';
 import { Logo } from '@/widgets';
 
 export default function Login() {
@@ -10,7 +10,7 @@ export default function Login() {
       <div className={styles.snsBtnsWrap}>
         <GoogleBtn />
         <KakaoBtn />
-        <AppleBtn />
+        <NaverBtn />
       </div>
     </main>
   );

@@ -20,6 +20,38 @@ export interface KakaoAuthResponse {
   };
 }
 
+export interface NaverLoginOptions {
+  clientId: string;
+  callbackUrl: string;
+  isPopup?: boolean;
+  loginButton?: {
+    color?: string;
+    type?: number;
+    height?: string | number;
+  };
+  callbackHandle?: boolean;
+}
+
+export interface NaverLogin {
+  new (options: NaverLoginOptions): this;
+  init(): void;
+  getLoginStatus(callback: (status: boolean) => void): void;
+  logout(): void;
+  accessToken: { accessToken: string };
+  user: {
+    age: undefined;
+    birthday: undefined;
+    birthyear: undefined;
+    email: string;
+    gender: undefined;
+    id: string;
+    mobile: undefined;
+    name: string;
+    nickname: string;
+    profile_image: string;
+  };
+}
+
 declare global {
   interface Window {
     Kakao: {
@@ -35,6 +67,9 @@ declare global {
       API: {
         request: (options: { url: string }) => Promise<KakaoAuthResponse>;
       };
+    };
+    naver: {
+      LoginWithNaverId: NaverLogin;
     };
   }
 }
