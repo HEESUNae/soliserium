@@ -1,6 +1,6 @@
 import { useUserAuthStore } from '@/entities';
 import { useState } from 'react';
-import { KakaoAuthResponse } from '../types/kakao-auth-type';
+import { KakaoAuthResponse } from '../types/social-login-type';
 
 export const useKakaoAuth = () => {
   const { setUserAuth } = useUserAuthStore();
