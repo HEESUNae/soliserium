@@ -1,15 +1,14 @@
 import { useUserAuthStore } from '@/entities';
 import { useState } from 'react';
-import { KakaoAuthResponse } from '../types/social-login-type';
-import { useRouter } from 'next/navigation';
+import { KakaoAuthResponse } from '../types/kakao-auth-type';
 
 export const useKakaoAuth = () => {
   const { setUserAuth } = useUserAuthStore();
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const kakaoLogin = async () => {
     try {
+      setIsLoading(true);
       const { Kakao } = window;
 
       // kakao sdk 리셋
@@ -20,7 +19,6 @@ export const useKakaoAuth = () => {
       // 로그인
       Kakao.Auth.login({
         success: async function (data: KakaoAuthResponse) {
-          setIsLoading(true);
           const res = await Kakao.API.request({ url: '/v2/user/me' });
           const { id, properties } = res;
           const userData = {
@@ -33,7 +31,6 @@ export const useKakaoAuth = () => {
           };
           setUserAuth(userData);
           setIsLoading(false);
-          router.push('/main');
         },
         fail: function (data: unknown) {
           console.log('fail :', data);

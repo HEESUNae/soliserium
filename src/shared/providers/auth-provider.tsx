@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!userAuth) {
+    if (userAuth.accessToken) {
+      router.push('/main');
+    } else {
       router.push('/login');
     }
   }, [userAuth]);

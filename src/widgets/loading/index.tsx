@@ -3,7 +3,7 @@ import styles from './style.module.css';
 export const Loading = () => {
   return (
     <div className={styles.loading}>
-      <div className={styles.loader}></div>
+      <Image src="/images/loading.gif" alt="" width={100} height={100} />
     </div>
   );
 };
