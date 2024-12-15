@@ -4,13 +4,14 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useActionState, useEffect } from 'react';
 import { authJoinAction } from '../actions/auth-join-action';
 import styles from './join-form.module.css';
+import { join } from 'path';
 
 export const JoinForm = () => {
-  const [joinData, formAction, isPanding] = useActionState(authJoinAction, null);
+  const [joinData, formAction] = useActionState(authJoinAction, null);
 
   useEffect(() => {
-    if (joinData?.status) {
-      authJoin(joinData.data?.userId!, joinData.data?.userPW!);
+    if (joinData?.status && joinData.data) {
+      authJoin(joinData.data?.userId, joinData.data?.userPW);
     }
   }, [joinData]);
 
