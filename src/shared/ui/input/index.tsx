@@ -26,7 +26,13 @@ export const Input = ({ value, regexp, errorMsg, ...rest }: InputProps) => {
 
   return (
     <div className={styles.inputWrap}>
-      <input className={isRegexp || !inputValue ? styles.input : styles.errorInput} defaultValue={value} onChange={checkRegexp} {...rest} />
+      <input
+        className={isRegexp || !inputValue ? styles.input : styles.errorInput}
+        defaultValue={value}
+        onChange={checkRegexp}
+        autoComplete="on"
+        {...rest}
+      />
       {errorMsg && !isRegexp && inputValue && <p className={styles.error}>{errorMsg}</p>}
     </div>
   );

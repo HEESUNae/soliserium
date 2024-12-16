@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         port: '',
       },
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'k.kakaocdn.net',
         port: '',
       },
