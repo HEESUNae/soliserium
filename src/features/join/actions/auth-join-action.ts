@@ -19,7 +19,6 @@ export async function authJoinAction(_: unknown, formData: FormData) {
       message: null,
     };
   } catch (e) {
-    console.log(e);
     return {
       status: false,
       data: null,

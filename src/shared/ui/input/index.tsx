@@ -7,33 +7,30 @@ interface InputProps {
   name?: string;
   value?: string;
   required?: boolean;
-  regexp?: RegExp;
+  isRegexp?: boolean;
   errorMsg?: string;
+  onChange?: (name: string, value: string) => void;
 }
 
-export const Input = ({ value, regexp, errorMsg, ...rest }: InputProps) => {
-  const [isRegexp, setIsRegexp] = useState<boolean>(false);
+export const Input = ({ value, isRegexp, errorMsg, onChange, ...rest }: InputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   // 정규식 체크
   const checkRegexp = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetValue = e.target.value;
-    setInputValue(targetValue);
-    if (targetValue && regexp) {
-      setIsRegexp(regexp?.test(targetValue));
-    }
+    setInputValue(e.target.value);
+    onChange?.(e.target.name, e.target.value);
   };
 
   return (
-    <div className={styles.inputWrap}>
+    <>
       <input
-        className={isRegexp || !inputValue ? styles.input : styles.errorInput}
+        className={isRegexp || !errorMsg || !inputValue ? styles.input : styles.errorInput}
         defaultValue={value}
         onChange={checkRegexp}
         autoComplete="on"
         {...rest}
       />
       {errorMsg && !isRegexp && inputValue && <p className={styles.error}>{errorMsg}</p>}
-    </div>
+    </>
   );
 };

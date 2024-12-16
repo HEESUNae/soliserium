@@ -45,19 +45,19 @@ export const LoginForm = () => {
     <>
       <div className={styles.form}>
         <form action={authLogin}>
-          <Input placeholder="ID" name="userId" value={idValue} />
-          <Input type="password" placeholder="PW" name="userPw" />
+          <Input placeholder="이메일" name="userId" value={idValue} />
+          <Input type="password" placeholder="비밀번호" name="userPw" />
           <Button type="submit" className="fill">
-            Login
+            로그인
           </Button>
         </form>
       </div>
       <div className={styles.authBtnWrap}>
         <Checkbox name="idSave" className="small" checked={isChecked} onChange={handleCheckbox}>
-          <p>Save ID</p>
+          <p>이메일 저장</p>
         </Checkbox>
-        <Link href={'/auth/join'}>Join</Link>
-        <Link href={'/auth/find/pw'}>Find Password</Link>
+        <Link href={'/auth/join'}>가입하기</Link>
+        <Link href={'/auth/find/pw'}>비밀번호 찾기</Link>
       </div>
     </>
   );

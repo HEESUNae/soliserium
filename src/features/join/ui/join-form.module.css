@@ -1,3 +1,7 @@
+.joinFormWrap form {
+  display: grid;
+  gap: 1rem;
+}
 .joinFormWrap input {
   width: 100%;
 }
