@@ -1,7 +1,6 @@
 import styles from './page.module.css';
 import { GoogleBtn, KakaoBtn, LoginForm } from '@/features';
 import { Logo } from '@/widgets';
-import { Suspense } from 'react';
 
 export default function Login() {
   return (
@@ -10,9 +9,7 @@ export default function Login() {
       <LoginForm />
       <div className={styles.snsBtnsWrap}>
         <GoogleBtn />
-        <Suspense>
-          <KakaoBtn />
-        </Suspense>
+        <KakaoBtn />
       </div>
     </main>
   );
