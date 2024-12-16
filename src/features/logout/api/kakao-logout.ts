@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const kakaoLogout = async (token: string) => {
   try {
-    const data = await axios.post(
+    await axios.post(
       'https://kapi.kakao.com/v1/user/logout',
       {},
       {
