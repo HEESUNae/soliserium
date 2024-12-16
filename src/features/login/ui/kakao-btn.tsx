@@ -9,7 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { useUserAuthStore } from '@/entities';
 
 export const KakaoBtn = () => {
-  const code = useSearchParams().get('code');
+  const code = useSearchParams().get('code') || '';
   const { setUserAuth } = useUserAuthStore();
 
   const handleUserAuth = async () => {
