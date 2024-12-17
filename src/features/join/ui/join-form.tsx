@@ -42,12 +42,12 @@ export const JoinForm = () => {
           photoURL: profileImg.url,
           providerId: user.providerId,
         });
-        setIsLoading(false);
         router.push('/login');
+        setIsLoading(false);
       }
     } catch (error: unknown) {
-      setIsLoading(false);
       if (error instanceof FirebaseError) {
+        setIsLoading(false);
         const errorMsg = getErrorMessage(error.code);
         alert(`회원가입에 실패했습니다. ${errorMsg}`);
         setDisabled(true);
