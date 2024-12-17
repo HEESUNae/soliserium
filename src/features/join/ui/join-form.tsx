@@ -13,26 +13,22 @@ import { checkRegex, getErrorMessage } from '../model/auth-join';
 import { Loading } from '@/widgets';
 
 export const JoinForm = () => {
-  const [disabled, setDisabled] = useState(true);
-  const [formChcek, setFormCheck] = useState({ profile: false, id: false, name: false, pw: false });
-  const [uploadImg, setUploadImg] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [formChcek, setFormCheck] = useState<Record<string, boolean>>({ profile: false, id: false, name: false, pw: false });
+  const [uploadImg, setUploadImg] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   // 회원가입
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const formData = new FormData(e.currentTarget);
-      const userId = formData.get('id') as string | null;
-      const userPW = formData.get('pw') as string | null;
-      const userName = formData.get('name');
-      const userProfile = formData.get('profile');
-
-      // null 검사 및 기본값 처리
-      if (!userId || !userPW || !userName || !userProfile) return;
-
       setIsLoading(true);
+      const formData = new FormData(e.currentTarget);
+      const userId = formData.get('id')?.toString() || '';
+      const userPW = formData.get('pw')?.toString() || '';
+      const userName = formData.get('name')?.toString() || '';
+      const userProfile = formData.get('profile');
 
       // 회원 생성
       const userCredential = await createUserWithEmailAndPassword(auth, userId, userPW);
