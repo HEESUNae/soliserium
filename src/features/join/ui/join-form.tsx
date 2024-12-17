@@ -75,7 +75,6 @@ export const JoinForm = () => {
   }, [formState]);
 
   if (isLoading) return <Loading />;
-  if (!formAction) return <></>;
 
   return (
     <div className={styles.joinFormWrap}>
