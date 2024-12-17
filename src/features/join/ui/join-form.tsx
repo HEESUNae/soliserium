@@ -24,7 +24,7 @@ export const JoinForm = () => {
   // 회원가입
   const formSubmit = async () => {
     try {
-      if (typeof window !== 'undefined') return;
+      if (typeof window === 'undefined') return;
       if (formState?.status && formState.data) {
         setIsLoading(true);
         // 회원 생성
