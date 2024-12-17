@@ -43,17 +43,17 @@ export const JoinForm = () => {
           providerId: user.providerId,
         });
         router.push('/login');
-        setIsLoading(false);
       }
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
-        setIsLoading(false);
         const errorMsg = getErrorMessage(error.code);
         alert(`회원가입에 실패했습니다. ${errorMsg}`);
         setDisabled(true);
         setUploadImg('');
         setFormCheck({ profile: false, id: false, name: false, pw: false });
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +75,7 @@ export const JoinForm = () => {
   }, [formState]);
 
   if (isLoading) return <Loading />;
+  if (!formAction) return <></>;
 
   return (
     <div className={styles.joinFormWrap}>
