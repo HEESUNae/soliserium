@@ -11,18 +11,21 @@ import { auth, db } from '@/shared/providers/firebase';
 import { authJoinAction } from '../actions/auth-join-action';
 import { getProfileImg } from '../api/upload-img';
 import { checkRegex, getErrorMessage } from '../model/auth-join';
+import { Loading } from '@/widgets';
 
 export const JoinForm = () => {
   const [formState, formAction] = useActionState(authJoinAction, null);
   const [disabled, setDisabled] = useState(true);
   const [formChcek, setFormCheck] = useState({ profile: false, id: false, name: false, pw: false });
   const [uploadImg, setUploadImg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   // 회원가입
   const formSubmit = async () => {
     try {
       if (formState?.status && formState.data) {
+        setIsLoading(true);
         // 회원 생성
         const userCredential = await createUserWithEmailAndPassword(auth, formState.data?.userId, formState.data?.userPW);
         const user = userCredential.user;
@@ -38,11 +41,11 @@ export const JoinForm = () => {
           photoURL: profileImg.url,
           providerId: user.providerId,
         });
-
-        alert('회원가입에 성공했습니다.');
+        setIsLoading(false);
         router.push('/login');
       }
     } catch (error: unknown) {
+      setIsLoading(false);
       if (error instanceof FirebaseError) {
         const errorMsg = getErrorMessage(error.code);
         alert(`회원가입에 실패했습니다. ${errorMsg}`);
@@ -69,6 +72,8 @@ export const JoinForm = () => {
   useEffect(() => {
     if (formState) formSubmit();
   }, [formState]);
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className={styles.joinFormWrap}>
