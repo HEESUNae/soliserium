@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './login-form.module.css';
 import { Button, Checkbox, Input } from '@/shared';
@@ -10,14 +10,13 @@ export const LoginForm = () => {
   const { savedId, setSavedId } = useIdSaveStore();
 
   const [idValue, setIdValue] = useState<string>('');
-  const checkboxRef = useRef<{ isChecked: boolean }>({ isChecked: false });
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   // 로그인
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const userId = new FormData(e.currentTarget).get('userId')?.toString() || '';
-      const isChecked = checkboxRef.current.isChecked;
       // 아이디저장 혹은 저장값 삭제
       isChecked && userId ? setSavedId(userId) : useIdSaveStore.persist.clearStorage();
       //todo: 여기에 파이어베이스 로그인 로직 추가
@@ -26,8 +25,14 @@ export const LoginForm = () => {
     }
   };
 
-  // 페이지 진입시 아이디저장 확인 여부
+  // 이메일저장 체크박스 핸들러
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsChecked(checked);
+  };
+
+  // 페이지 진입시 이메일저장 확인 여부
   useEffect(() => {
+    setIsChecked(!!savedId);
     setIdValue(savedId || '');
   }, [savedId]);
 
@@ -43,7 +48,7 @@ export const LoginForm = () => {
         </form>
       </div>
       <div className={styles.authBtnWrap}>
-        <Checkbox name="idSave" className="small" checked={!!savedId} ref={checkboxRef}>
+        <Checkbox name="idSave" className="small" checked={isChecked} onchange={handleCheckboxChange}>
           <p>이메일 저장</p>
         </Checkbox>
         <Link href={'/auth/join'}>회원가입</Link>

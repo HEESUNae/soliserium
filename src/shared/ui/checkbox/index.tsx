@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useImperativeHandle, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import styles from './style.module.css';
 
 interface CheckboxProps {
@@ -9,20 +9,16 @@ interface CheckboxProps {
   children: ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
-  ref?: any;
+  onchange?: (isChecked: boolean) => void;
 }
 
-export const Checkbox = ({ name, className, checked, children, ref, ...rest }: CheckboxProps) => {
+export const Checkbox = ({ name, className, checked, onchange, children, ...rest }: CheckboxProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  // 부모에게 현재 체크값 넘겨주기
-  useImperativeHandle(ref, () => ({
-    isChecked,
-  }));
 
   // 아이디저장 체크박스 이벤트 핸들러
   const handleCheckbox = () => {
-    setIsChecked((prev) => !prev);
+    setIsChecked(!isChecked);
+    onchange?.(!isChecked);
   };
 
   // 체크박스 값 변경
