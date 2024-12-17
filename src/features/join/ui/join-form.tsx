@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './join-form.module.css';
 import { FirebaseError } from 'firebase/app';
@@ -8,13 +8,11 @@ import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Button, Input, File } from '@/shared';
 import { auth, db } from '@/shared/providers/firebase';
-import { authJoinAction } from '../actions/auth-join-action';
 import { getProfileImg } from '../api/upload-img';
 import { checkRegex, getErrorMessage } from '../model/auth-join';
 import { Loading } from '@/widgets';
 
 export const JoinForm = () => {
-  const [formState, formAction] = useActionState(authJoinAction, null);
   const [disabled, setDisabled] = useState(true);
   const [formChcek, setFormCheck] = useState({ profile: false, id: false, name: false, pw: false });
   const [uploadImg, setUploadImg] = useState('');
@@ -22,27 +20,38 @@ export const JoinForm = () => {
   const router = useRouter();
 
   // 회원가입
-  const formSubmit = async () => {
+  const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
-      if (formState?.status && formState.data) {
-        setIsLoading(true);
-        // 회원 생성
-        const userCredential = await createUserWithEmailAndPassword(auth, formState.data?.userId, formState.data?.userPW);
-        const user = userCredential.user;
+      const formData = new FormData(e.currentTarget);
+      const userId = formData.get('id') as string | null;
+      const userPW = formData.get('pw') as string | null;
+      const userName = formData.get('name');
+      const userProfile = formData.get('profile');
 
-        // 이미지 파일을 cloudinary 저장소에 저장하고 이미지 url 반환
-        const profileImg = await getProfileImg(formState.data?.userProile as File);
-
-        // 회원 정보 저장
-        await setDoc(doc(db, 'users', user.uid), {
-          id: user.uid,
-          email: user.email,
-          name: formState.data.userName,
-          photoURL: profileImg.url,
-          providerId: user.providerId,
-        });
-        router.push('/login');
+      // null 검사 및 기본값 처리
+      if (!userId || !userPW || !userName || !userProfile) {
+        return;
       }
+
+      setIsLoading(true);
+
+      // 회원 생성
+      const userCredential = await createUserWithEmailAndPassword(auth, userId, userPW);
+      const user = userCredential.user;
+
+      // 이미지 파일을 cloudinary 저장소에 저장하고 이미지 url 반환
+      const profileImg = await getProfileImg(userProfile as File);
+
+      // 회원 정보 저장
+      await setDoc(doc(db, 'users', user.uid), {
+        id: user.uid,
+        email: user.email,
+        name: userName,
+        photoURL: profileImg.url,
+        providerId: user.providerId,
+      });
+      router.push('/login');
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         const errorMsg = getErrorMessage(error.code);
@@ -68,16 +77,11 @@ export const JoinForm = () => {
     setDisabled(!allVaild);
   }, [formChcek]);
 
-  // 폼 제출하면 파이어베이스 회원가입 진행
-  useEffect(() => {
-    if (formState) formSubmit();
-  }, [formState]);
-
   if (isLoading) return <Loading />;
 
   return (
     <div className={styles.joinFormWrap}>
-      <form action={formAction}>
+      <form onSubmit={formSubmit}>
         <div className={styles.profileWrap}>
           <File name="profile" isVaild={formChcek.profile} onChange={handleUpdateCheck} uploadImg={uploadImg} setUploadImg={setUploadImg} />
         </div>

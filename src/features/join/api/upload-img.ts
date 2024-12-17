@@ -1,5 +1,3 @@
-'use client';
-
 // 이미지 파일을 cloudinary 저장소에 저장하고 이미지 url 반환
 export const getProfileImg = async (value: File) => {
   const formData = new FormData();
