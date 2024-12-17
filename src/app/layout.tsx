@@ -30,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=no;" />
+      </head>
       <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY as string}>
           <AuthProvider>{children}</AuthProvider>
