@@ -24,7 +24,7 @@ export const File = ({ onChange, isVaild, name, uploadImg, setUploadImg }: FileP
   return (
     <div className={styles.fileWrap}>
       <div className={styles.file}>
-        <input type="file" id="file" name={name} onChange={handleFileValue} multiple={false} />
+        <input type="file" id="file" name={name} onChange={handleFileValue} multiple={false} accept="image/jpeg, image/png, image/webp" />
         <label htmlFor="file">
           <Image
             src={uploadImg || '/images/user-default.png'}
