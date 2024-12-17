@@ -56,7 +56,7 @@ export const LoginForm = () => {
         <Checkbox name="idSave" className="small" checked={isChecked} onChange={handleCheckbox}>
           <p>이메일 저장</p>
         </Checkbox>
-        <Link href={'/auth/join'}>가입하기</Link>
+        <Link href={'/auth/join'}>회원가입</Link>
         <Link href={'/auth/find/pw'}>비밀번호 찾기</Link>
       </div>
     </>

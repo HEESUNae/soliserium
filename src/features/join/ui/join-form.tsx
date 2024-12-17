@@ -30,9 +30,7 @@ export const JoinForm = () => {
       const userProfile = formData.get('profile');
 
       // null 검사 및 기본값 처리
-      if (!userId || !userPW || !userName || !userProfile) {
-        return;
-      }
+      if (!userId || !userPW || !userName || !userProfile) return;
 
       setIsLoading(true);
 
@@ -56,6 +54,7 @@ export const JoinForm = () => {
       if (error instanceof FirebaseError) {
         const errorMsg = getErrorMessage(error.code);
         alert(`회원가입에 실패했습니다. ${errorMsg}`);
+        // 리셋
         setDisabled(true);
         setUploadImg('');
         setFormCheck({ profile: false, id: false, name: false, pw: false });
