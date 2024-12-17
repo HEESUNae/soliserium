@@ -73,7 +73,6 @@ export const JoinForm = () => {
     if (formState) formSubmit();
   }, [formState]);
 
-  if (typeof window === 'undefined') return;
   if (isLoading) return <Loading />;
 
   return (
