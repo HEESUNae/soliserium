@@ -2,9 +2,9 @@
 
 export async function authJoinAction(_: unknown, formData: FormData) {
   try {
-    const userId = formData.get('id')?.toString();
-    const userPW = formData.get('pw')?.toString();
-    const userName = formData.get('name')?.toString();
+    const userId = formData.get('id')?.toString() ?? '';
+    const userPW = formData.get('pw')?.toString() ?? '';
+    const userName = formData.get('name')?.toString() ?? '';
     const userProile = formData.get('profile');
 
     if (!userId || !userPW || !userName || !userProile) {
