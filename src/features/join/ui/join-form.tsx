@@ -38,7 +38,7 @@ export const JoinForm = () => {
           id: user.uid,
           email: user.email,
           name: formState.data.userName,
-          photoURL: profileImg.url,
+          photoURL: profileImg,
           providerId: user.providerId,
         });
         router.push('/login');
