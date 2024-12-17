@@ -71,7 +71,7 @@ export const JoinForm = () => {
 
   // 폼 제출하면 파이어베이스 회원가입 진행
   useEffect(() => {
-    if (formState) formSubmit();
+    if (formState?.status && formState.data) formSubmit();
   }, [formState]);
 
   if (isLoading) return <Loading />;
