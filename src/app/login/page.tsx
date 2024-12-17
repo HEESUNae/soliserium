@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import styles from './page.module.css';
 import { GoogleBtn, KakaoBtn, LoginForm } from '@/features';
 import { Logo } from '@/widgets';
-import { Suspense } from 'react';
 
 export default function Login() {
   return (
@@ -9,7 +10,9 @@ export default function Login() {
       <Logo size="big" />
       <LoginForm />
       <div className={styles.snsBtnsWrap}>
-        <GoogleBtn />
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_KEY as string}>
+          <GoogleBtn />
+        </GoogleOAuthProvider>
         <Suspense>
           <KakaoBtn />
         </Suspense>
