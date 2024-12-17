@@ -4,18 +4,20 @@ export async function authJoinAction(_: unknown, formData: FormData) {
   try {
     const userId = formData.get('id')?.toString();
     const userPW = formData.get('pw')?.toString();
+    const userName = formData.get('name')?.toString();
+    const userProile = formData.get('profile');
 
-    if (!userId || !userPW) {
+    if (!userId || !userPW || !userName || !userProile) {
       return {
         status: false,
         data: null,
-        message: '아이디 또는 패스워드를 확인해주세요.',
+        message: '필수 양식을 작성해주세요.',
       };
     }
 
     return {
       status: true,
-      data: { userId, userPW },
+      data: { userId, userPW, userName, userProile },
       message: null,
     };
   } catch (e) {

@@ -7,12 +7,12 @@ interface InputProps {
   name?: string;
   value?: string;
   required?: boolean;
-  isRegexp?: boolean;
+  isVaild?: boolean;
   errorMsg?: string;
   onChange?: (name: string, value: string) => void;
 }
 
-export const Input = ({ value, isRegexp, errorMsg, onChange, ...rest }: InputProps) => {
+export const Input = ({ value, isVaild, errorMsg, onChange, ...rest }: InputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   // 정규식 체크
@@ -22,15 +22,15 @@ export const Input = ({ value, isRegexp, errorMsg, onChange, ...rest }: InputPro
   };
 
   return (
-    <>
+    <div>
       <input
-        className={isRegexp || !errorMsg || !inputValue ? styles.input : styles.errorInput}
+        className={isVaild || !inputValue || !errorMsg ? styles.input : styles.errorInput}
         defaultValue={value}
         onChange={checkRegexp}
-        autoComplete="on"
+        autoComplete="off"
         {...rest}
       />
-      {errorMsg && !isRegexp && inputValue && <p className={styles.error}>{errorMsg}</p>}
-    </>
+      {errorMsg && !isVaild && inputValue && <p className={styles.error}>{errorMsg}</p>}
+    </div>
   );
 };
