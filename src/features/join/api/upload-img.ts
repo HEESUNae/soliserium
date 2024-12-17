@@ -5,6 +5,7 @@ export const getProfileImg = async (value: File) => {
   formData.append('upload_preset', 'soliserium');
   formData.append('folder', 'profile');
   formData.append('exif', 'false');
+  formData.append('metadata', 'false');
   formData.append(
     'transformation',
     JSON.stringify([
