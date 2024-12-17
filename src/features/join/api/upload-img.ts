@@ -4,6 +4,8 @@ export const getProfileImg = async (value: File) => {
   formData.append('file', value);
   formData.append('upload_preset', 'soliserium');
   formData.append('folder', 'profile');
+  formData.append('transformation[quality]', 'auto');
+  formData.append('transformation[fetch_format]', 'auto');
 
   const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
   return await fetch(url, { method: 'POST', body: formData }).then((res) => res.json());
