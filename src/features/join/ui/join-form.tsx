@@ -24,7 +24,6 @@ export const JoinForm = () => {
   // 회원가입
   const formSubmit = async () => {
     try {
-      if (typeof window === 'undefined') return;
       if (formState?.status && formState.data) {
         setIsLoading(true);
         // 회원 생성
@@ -71,9 +70,10 @@ export const JoinForm = () => {
 
   // 폼 제출하면 파이어베이스 회원가입 진행
   useEffect(() => {
-    if (formState?.status && formState.data) formSubmit();
+    if (formState) formSubmit();
   }, [formState]);
 
+  if (typeof window === 'undefined') return;
   if (isLoading) return <Loading />;
 
   return (
