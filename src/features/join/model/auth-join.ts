@@ -1,8 +1,8 @@
 import { auth } from '@/shared';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getProfileImg } from '../api/upload-img';
-import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/providers/firebase';
+import { User, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { getProfileImg } from '../api/upload-img';
 
 // 파이어베이스 회원가입 실패 알림메세지
 export const getErrorMessage = (code: string): string => {
@@ -32,11 +32,22 @@ export const checkRegex = (name: string, value: string) => {
 };
 
 // 회원가입
-export const updataUser = async (userId: string, userPW: string, userName: string, userProfile: File) => {
+export const updateUser = async (userId: string, userPW: string, userName: string, userProfile: File) => {
   // 회원 생성
   const userCredential = await createUserWithEmailAndPassword(auth, userId, userPW);
   const user = userCredential.user;
 
+  // 회원가입시 다른정보도 내용 저장
+  await updateUserInfo(user, userName, userProfile);
+
+  // 이메일 인증 링크 전송
+  auth.languageCode = 'kr';
+  await sendEmailVerification(user);
+  alert('회원가입이 완료되었습니다. 이메일 인증 링크를 인증후에 로그인 가능합니다.');
+};
+
+// 사용자
+export const updateUserInfo = async (user: User, userName: string, userProfile: File) => {
   // 이미지 파일을 cloudinary 저장소에 저장하고 이미지 url 반환
   const profileImg = await getProfileImg(userProfile);
 
