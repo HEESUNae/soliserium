@@ -8,7 +8,6 @@ import { useIdSaveStore } from '@/entities';
 
 export const LoginForm = () => {
   const { savedId, setSavedId } = useIdSaveStore();
-
   const [idValue, setIdValue] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
