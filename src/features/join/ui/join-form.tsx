@@ -72,6 +72,7 @@ export const JoinForm = () => {
         />
         <Input placeholder="이메일" name="id" isVaild={formChcek.id} onChange={handleUpdateCheck} errorMsg="이메일 형식이 아닙니다." />
         <Input
+          type="password"
           placeholder="비밀번호 (영어 또는 숫자 6글자 이상)"
           name="pw"
           isVaild={formChcek.pw}
@@ -79,7 +80,7 @@ export const JoinForm = () => {
           errorMsg="영어, 숫자로 6글자 이상 입력해주세요."
         />
         <Button type="submit" className="fill" disabled={disabled}>
-          회원가입
+          가입하기
         </Button>
       </form>
     </div>

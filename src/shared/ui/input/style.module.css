@@ -1,12 +1,12 @@
 .input {
   padding: 1.2rem;
   border: 0.1rem solid #ddd;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   border-radius: 0.4rem;
 }
 .errorInput {
   padding: 1.2rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   border-radius: 0.4rem;
   border: 0.1rem solid red;
 }

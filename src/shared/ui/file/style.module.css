@@ -17,6 +17,7 @@
 }
 .defaultImg {
   border-radius: 50%;
+  border: 0.1rem solid red;
 }
 .uploadImg {
   border-radius: 50%;
