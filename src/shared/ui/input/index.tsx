@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import styles from './style.module.css';
 
@@ -9,7 +11,7 @@ interface InputProps {
   required?: boolean;
   isVaild?: boolean;
   errorMsg?: string;
-  onChange?: (name: string, value: string) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = ({ value, isVaild, errorMsg, onChange, ...rest }: InputProps) => {
@@ -18,7 +20,7 @@ export const Input = ({ value, isVaild, errorMsg, onChange, ...rest }: InputProp
   // 정규식 체크
   const checkRegexp = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    onChange?.(e.target.name, e.target.value);
+    onChange?.(e);
   };
 
   return (

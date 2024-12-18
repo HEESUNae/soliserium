@@ -7,6 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 export const getErrorMessage = (code: string): string => {
   const messages: Record<string, string> = {
     'auth/invalid-email': '아이디 또는 비밀번호를 확인해주세요',
+    'Error: Email not verified': '이메일 인증을 완료한 후에 로그인 가능합니다.',
     default: '아이디 또는 비밀번호를 확인해주세요',
   };
   return messages[code] || messages.default;
@@ -14,19 +15,29 @@ export const getErrorMessage = (code: string): string => {
 
 // 로그인시 기존 회원인지 체크
 export const getCheckUser = async (userId: string, userPw: string) => {
-  const userCredential = await signInWithEmailAndPassword(auth, userId, userPw);
-  const user = userCredential.user as User;
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, userId, userPw);
+    const user = userCredential.user as User;
 
-  const accessToken = await user.getIdToken();
-  const userInfo = await getUserInfo(user.uid);
+    // 이메일 인증 안된 계정은 로그인 못함
+    if (!user.emailVerified) {
+      throw new Error('Email not verified');
+    }
+    const accessToken = await user.getIdToken();
+    const userInfo = await getUserInfo(user);
 
-  if (!accessToken || !userInfo) return;
-  return { accessToken, ...userInfo };
+    return { accessToken, ...userInfo };
+  } catch (error) {
+    const errorMsg = getErrorMessage(error as string);
+    alert(`${errorMsg}`);
+    console.log('로그인 실패:', error);
+  }
 };
 
 // 기존 유저 정보 가져오기
-export const getUserInfo = async (userId: string) => {
-  const docSnap = await getDoc(doc(db, 'users', userId));
-  if (!docSnap.exists()) return;
-  return docSnap.data();
+export const getUserInfo = async (user: User) => {
+  const docSnap = await getDoc(doc(db, 'users', user.uid));
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
 };

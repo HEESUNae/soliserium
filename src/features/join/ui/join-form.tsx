@@ -5,7 +5,7 @@ import { Loading } from '@/widgets';
 import { FirebaseError } from 'firebase/app';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { checkRegex, getErrorMessage, updataUser } from '../model/auth-join';
+import { checkRegex, getErrorMessage, updateUser } from '../model/auth-join';
 import styles from './join-form.module.css';
 
 export const JoinForm = () => {
@@ -25,7 +25,8 @@ export const JoinForm = () => {
       const userName = formData.get('name')?.toString() ?? '';
       const userProfile = formData.get('profile') as File;
 
-      await updataUser(userId, userPW, userName, userProfile);
+      await updateUser(userId, userPW, userName, userProfile);
+
       router.push('/login');
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
@@ -41,7 +42,9 @@ export const JoinForm = () => {
   };
 
   // 정규식 체크하기
-  const handleUpdateCheck = (name: string, value: string) => {
+  const handleUpdateCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    const value = e.target.value;
     const isValid = checkRegex(name, value);
     setFormCheck((prev) => ({ ...prev, [name]: isValid }));
   };

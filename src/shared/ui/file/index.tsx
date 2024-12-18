@@ -3,7 +3,7 @@ import { SetStateAction } from 'react';
 import styles from './style.module.css';
 
 interface FileProps {
-  onChange: (name: string, value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   isVaild?: boolean;
   uploadImg: string;
@@ -18,7 +18,7 @@ export const File = ({ onChange, isVaild, name, uploadImg, setUploadImg }: FileP
       const fileURL = URL.createObjectURL(file);
       setUploadImg(fileURL);
     }
-    onChange?.(e.target.name, e.target.value);
+    onChange?.(e);
   };
 
   return (
