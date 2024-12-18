@@ -7,18 +7,17 @@ interface CheckboxProps {
   name: string;
   className?: string;
   children: ReactNode;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked?: boolean;
-  onchange?: (isChecked: boolean) => void;
+  onChange?: (isChecked: boolean) => void;
 }
 
-export const Checkbox = ({ name, className, checked, onchange, children, ...rest }: CheckboxProps) => {
+export const Checkbox = ({ name, className, checked, onChange, children, ...rest }: CheckboxProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   // 아이디저장 체크박스 이벤트 핸들러
   const handleCheckbox = () => {
     setIsChecked(!isChecked);
-    onchange?.(!isChecked);
+    onChange?.(!isChecked);
   };
 
   // 체크박스 값 변경

@@ -15,9 +15,14 @@ export const LoginForm = () => {
   const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const userId = new FormData(e.currentTarget).get('userId')?.toString() || '';
+      const formData = new FormData();
+      const userId = formData.get('userId')?.toString() || '';
       // 아이디저장 혹은 저장값 삭제
-      isChecked ? setSavedId(userId) : useIdSaveStore.persist.clearStorage();
+      if (isChecked) {
+        setSavedId(userId);
+      } else {
+        useIdSaveStore.persist.clearStorage();
+      }
       //todo: 여기에 파이어베이스 로그인 로직 추가
     } catch (e) {
       console.log(e);
@@ -47,7 +52,7 @@ export const LoginForm = () => {
         </form>
       </div>
       <div className={styles.authBtnWrap}>
-        <Checkbox name="idSave" className="small" checked={isChecked} onchange={handleCheckboxChange}>
+        <Checkbox name="idSave" className="small" checked={isChecked} onChange={handleCheckboxChange}>
           <p>이메일 저장</p>
         </Checkbox>
         <Link href={'/auth/join'}>회원가입</Link>
