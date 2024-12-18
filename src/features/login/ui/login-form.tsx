@@ -17,7 +17,7 @@ export const LoginForm = () => {
     try {
       const userId = new FormData(e.currentTarget).get('userId')?.toString() || '';
       // 아이디저장 혹은 저장값 삭제
-      isChecked && userId ? setSavedId(userId) : useIdSaveStore.persist.clearStorage();
+      isChecked ? setSavedId(userId) : useIdSaveStore.persist.clearStorage();
       //todo: 여기에 파이어베이스 로그인 로직 추가
     } catch (e) {
       console.log(e);
