@@ -1,31 +1,47 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import styles from './login-form.module.css';
+import { useIdSaveStore, useUserAuthStore } from '@/entities';
 import { Button, Checkbox, Input } from '@/shared';
-import { useIdSaveStore } from '@/entities';
+import { FirebaseError } from 'firebase/app';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { getCheckUser, getErrorMessage } from '../model/auth-login';
+import styles from './login-form.module.css';
 
 export const LoginForm = () => {
   const { savedId, setSavedId } = useIdSaveStore();
   const [idValue, setIdValue] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const { setUserAuth } = useUserAuthStore();
 
   // 로그인
-  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      const userId = formData.get('userId')?.toString() || '';
-      // 아이디저장 혹은 저장값 삭제
-      if (isChecked) {
-        setSavedId(userId);
-      } else {
-        useIdSaveStore.persist.clearStorage();
+      const formData = new FormData(e.currentTarget);
+      const userId = formData.get('id')?.toString() || '';
+      const userPw = formData.get('pw')?.toString() || '';
+
+      // 기존 가입자 유저인지 확인
+      const user = await getCheckUser(userId, userPw);
+      if (user) {
+        setUserAuth(user);
+        saveUserId(userId);
       }
-      //todo: 여기에 파이어베이스 로그인 로직 추가
-    } catch (e) {
-      console.log(e);
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        const errorMsg = getErrorMessage(error.code);
+        alert(`${errorMsg}`);
+      }
+    }
+  };
+
+  // 아이디저장 혹은 저장값 삭제
+  const saveUserId = (userId: string) => {
+    if (isChecked) {
+      setSavedId(userId);
+    } else {
+      useIdSaveStore.persist.clearStorage();
     }
   };
 
@@ -44,8 +60,8 @@ export const LoginForm = () => {
     <>
       <div className={styles.form}>
         <form onSubmit={formSubmit}>
-          <Input placeholder="이메일" name="userId" value={idValue} />
-          <Input type="password" placeholder="비밀번호" name="userPw" />
+          <Input placeholder="이메일" name="id" value={idValue} />
+          <Input type="password" placeholder="비밀번호" name="pw" />
           <Button type="submit" className="fill">
             로그인
           </Button>

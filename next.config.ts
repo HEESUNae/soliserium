@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: 'k.kakaocdn.net',
         port: '',
       },
+      {
+        protocol: 'http',
+        hostname: 'res.cloudinary.com',
+        port: '',
+      },
     ],
   },
 };

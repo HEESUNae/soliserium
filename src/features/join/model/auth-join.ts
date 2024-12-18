@@ -1,3 +1,9 @@
+import { auth } from '@/shared';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getProfileImg } from '../api/upload-img';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '@/shared/providers/firebase';
+
 // 파이어베이스 회원가입 실패 알림메세지
 export const getErrorMessage = (code: string): string => {
   const messages: Record<string, string> = {
@@ -23,4 +29,23 @@ export const checkRegex = (name: string, value: string) => {
     isValid = true;
   }
   return isValid;
+};
+
+// 회원가입
+export const updataUser = async (userId: string, userPW: string, userName: string, userProfile: File) => {
+  // 회원 생성
+  const userCredential = await createUserWithEmailAndPassword(auth, userId, userPW);
+  const user = userCredential.user;
+
+  // 이미지 파일을 cloudinary 저장소에 저장하고 이미지 url 반환
+  const profileImg = await getProfileImg(userProfile);
+
+  // 회원 정보 저장
+  await setDoc(doc(db, 'users', user.uid), {
+    id: user.uid,
+    email: user.email,
+    name: userName,
+    photoURL: profileImg.url,
+    providerId: user.providerId,
+  });
 };
