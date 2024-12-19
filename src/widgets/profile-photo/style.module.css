@@ -1,0 +1,9 @@
+.profile {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.profile img {
+  object-fit: cover;
+}

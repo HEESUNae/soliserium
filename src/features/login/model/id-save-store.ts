@@ -3,14 +3,14 @@ import { persist } from 'zustand/middleware';
 
 interface IdSaveState {
   savedId: string;
-  setSavedId: (id: string) => void;
+  setSavedId: (uid: string) => void;
 }
 
 export const useIdSaveStore = create(
   persist<IdSaveState>(
     (set) => ({
       savedId: '',
-      setSavedId: (id: string) => set(() => ({ savedId: id })),
+      setSavedId: (uid: string) => set(() => ({ savedId: uid })),
     }),
     {
       name: 'idSave',

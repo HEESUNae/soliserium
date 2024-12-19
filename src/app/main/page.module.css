@@ -1,3 +1,29 @@
+.main {
+  position: relative;
+}
 .logo {
   font-size: 2rem;
+}
+.listWrap {
+  overflow-y: auto;
+  max-height: calc(100vh - 20.4rem);
+  min-width: -webkit-fill-available;
+}
+.listWrap::-webkit-scrollbar {
+  width: 0;
+}
+.tabWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.1rem solid var(--color-lightGray);
+}
+.tabWrap button {
+  width: 50%;
+  height: 5.6rem;
+  border-radius: 0;
+}
+.tabContent {
+  display: flex;
+  transition: 0.3s;
 }

@@ -1,0 +1,11 @@
+.postList {
+  padding: 1.6rem;
+  border-radius: 0.4rem;
+  border-bottom: 0.1rem solid var(--color-lightGray);
+  display: flex;
+  gap: 1rem;
+}
+
+.postList p {
+  margin: 0.8rem 0;
+}

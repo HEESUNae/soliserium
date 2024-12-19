@@ -38,7 +38,7 @@ export const getKakaoToken = async (code: string): Promise<UserInfoType> => {
     const user = jwtDecode<KakaoJwtPayload>(data.id_token);
     const userData = {
       accessToken: data.access_token,
-      id: user.sub,
+      uid: user.sub,
       name: user.nickname,
       email: user.email,
       photoURL: user.picture,

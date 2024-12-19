@@ -1,7 +1,7 @@
 // 정규식 체크
 export const checkRegex = (name: string, value: string) => {
   let isValid = false;
-  if (name === 'id') {
+  if (name === 'uid') {
     isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value); // 이메일
   } else if (name === 'name') {
     isValid = /^(?! )[a-zA-Z가-힣 ]+$/.test(value); // 영문 + 숫자 포함

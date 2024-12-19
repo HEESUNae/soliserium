@@ -1,6 +1,7 @@
 export { Button } from './ui/button';
 export { Input } from './ui/input';
 export { Checkbox } from './ui/checkbox';
+export { Textarea } from './ui/textarea';
 export { File } from './ui/file';
 
 // provider

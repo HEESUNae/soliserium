@@ -25,7 +25,7 @@ export const updateUserInfo = async (user: User, userName: string, userProfile: 
 
   // 회원 정보 저장
   await setDoc(doc(db, 'users', user.uid), {
-    id: user.uid,
+    uid: user.uid,
     email: user.email,
     name: userName,
     photoURL: profileImg.url,

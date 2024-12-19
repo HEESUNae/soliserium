@@ -4,5 +4,5 @@ export interface UserInfoType {
   email?: string;
   photoURL?: string;
   providerId?: string;
-  id?: string | number;
+  uid?: string | number;
 }

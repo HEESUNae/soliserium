@@ -19,7 +19,7 @@ export const LoginForm = () => {
     e.preventDefault();
     try {
       const formData = new FormData(e.currentTarget);
-      const userId = formData.get('id')?.toString() || '';
+      const userId = formData.get('uid')?.toString() || '';
       const userPw = formData.get('pw')?.toString() || '';
 
       // 기존 가입자 유저인지 확인
@@ -60,7 +60,7 @@ export const LoginForm = () => {
     <>
       <div className={styles.form}>
         <form onSubmit={formSubmit}>
-          <Input placeholder="이메일" name="id" value={idValue} />
+          <Input placeholder="이메일" name="uid" value={idValue} />
           <Input type="password" placeholder="비밀번호" name="pw" />
           <Button type="submit" className="fill">
             로그인

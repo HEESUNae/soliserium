@@ -10,7 +10,7 @@ import { getErrorMessage, updateUser } from '@/entities';
 
 export const JoinForm = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
-  const [formChcek, setFormCheck] = useState<Record<string, boolean>>({ profile: false, id: false, name: false, pw: false });
+  const [formChcek, setFormCheck] = useState<Record<string, boolean>>({ profile: false, uid: false, name: false, pw: false });
   const [uploadImg, setUploadImg] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -20,7 +20,7 @@ export const JoinForm = () => {
     try {
       setIsLoading(true);
       const formData = new FormData(e.currentTarget);
-      const userId = formData.get('id')?.toString() ?? '';
+      const userId = formData.get('uid')?.toString() ?? '';
       const userPW = formData.get('pw')?.toString() ?? '';
       const userName = formData.get('name')?.toString() ?? '';
       const userProfile = formData.get('profile') as File;
@@ -35,7 +35,7 @@ export const JoinForm = () => {
       }
       setDisabled(true);
       setUploadImg('');
-      setFormCheck({ profile: false, id: false, name: false, pw: false });
+      setFormCheck({ profile: false, uid: false, name: false, pw: false });
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +70,7 @@ export const JoinForm = () => {
           onChange={handleUpdateCheck}
           errorMsg="영어, 한글 이름 형식으로 입력해주세요."
         />
-        <Input placeholder="이메일" name="id" isVaild={formChcek.id} onChange={handleUpdateCheck} errorMsg="이메일 형식이 아닙니다." />
+        <Input placeholder="이메일" name="uid" isVaild={formChcek.uid} onChange={handleUpdateCheck} errorMsg="이메일 형식이 아닙니다." />
         <Input
           type="password"
           placeholder="비밀번호 (영어 또는 숫자 6글자 이상)"

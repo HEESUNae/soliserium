@@ -3,10 +3,12 @@
 import styles from './find-pw-form.module.css';
 import { Button, Input, auth, checkRegex } from '@/shared';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
 
 export const FindPwForm = () => {
   const [formCheck, setFormCheck] = useState(false);
+  const router = useRouter();
 
   // 비밀번호 찾기
   const formSubmit = useCallback(
@@ -14,11 +16,12 @@ export const FindPwForm = () => {
       e.preventDefault();
       try {
         const formData = new FormData(e.currentTarget);
-        const userId = formData.get('id')?.toString() ?? '';
+        const userId = formData.get('uid')?.toString() ?? '';
 
         if (userId) {
           await sendPasswordResetEmail(auth, userId);
           alert('비밀번호 재설정 이메일이 전송되었습니다. 이메일을 확인해주세요.');
+          router.push('/login');
         }
       } catch (e) {
         alert('비밀번호 재설정 요청 중 오류가 발생했습니다.');
@@ -29,7 +32,7 @@ export const FindPwForm = () => {
   );
 
   const handleFormCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checkRegexp = checkRegex('id', e.target.value);
+    const checkRegexp = checkRegex('uid', e.target.value);
     setFormCheck(checkRegexp);
   };
 
@@ -39,7 +42,7 @@ export const FindPwForm = () => {
       <form onSubmit={formSubmit} className={styles.form}>
         <Input
           placeholder="회원가입시 입력한 이메일을 입력해주세요."
-          name="id"
+          name="uid"
           isVaild={formCheck}
           onChange={handleFormCheck}
           errorMsg="이메일 형식이 아닙니다."

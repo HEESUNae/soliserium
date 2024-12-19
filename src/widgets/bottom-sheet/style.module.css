@@ -1,0 +1,46 @@
+.bottomSheet {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+}
+.bottomSheet header {
+  justify-content: space-between;
+}
+.bottomSheet h2 {
+  margin-bottom: 0;
+}
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.bottomSheetBox {
+  height: 90%;
+  background-color: #fff;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  bottom: 0;
+  border-radius: 1.6rem 1.6rem 0 0;
+}
+.bottomSheetBox .content {
+  padding: 1.6rem;
+  height: 90%;
+}
+
+.buttonBtnWrap {
+  margin-top: 1.6rem;
+}
+
+@media (min-width: 700px) {
+  .bottomSheetBox {
+    width: 35rem;
+  }
+  .backdrop {
+    width: 35rem;
+  }
+}

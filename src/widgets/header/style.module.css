@@ -2,8 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem;
+  padding: 1.2rem 2rem;
   border-bottom: 0.1rem solid var(--color-lightGray);
   height: 6rem;
   position: relative;
+}
+.between {
+  justify-content: space-between;
 }

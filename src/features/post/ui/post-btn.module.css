@@ -1,6 +1,21 @@
 .postBtn {
-  margin: 1.6rem;
-  padding: 1rem;
+  padding: 1.6rem;
   border-radius: 0.4rem;
-  border: 0.1rem solid var(--color-gray);
+  border-bottom: 0.1rem solid var(--color-lightGray);
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+}
+.postBtn figure {
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.postBtn figure img {
+  object-fit: cover;
+}
+.postBtn p {
+  margin-top: 0.8rem;
+  color: #888;
 }
