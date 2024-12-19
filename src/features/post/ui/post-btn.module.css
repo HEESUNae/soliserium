@@ -1,5 +1,5 @@
 .postBtn {
-  padding: 1.6rem;
+  padding: 1.2rem;
   border-radius: 0.4rem;
   border-bottom: 0.1rem solid var(--color-lightGray);
   display: flex;
@@ -16,6 +16,6 @@
   object-fit: cover;
 }
 .postBtn p {
-  margin-top: 0.8rem;
+  margin-top: 0.2rem;
   color: #888;
 }

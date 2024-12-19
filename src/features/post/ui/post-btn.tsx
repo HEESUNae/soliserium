@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import styles from './post-btn.module.css';
 import { useUserAuthStore } from '@/entities';
+import { ProfilePhoto } from '@/widgets';
 
 interface PostBtnProps {
   onClick: () => void;
@@ -14,7 +14,7 @@ export const PostBtn = ({ onClick }: PostBtnProps) => {
   return (
     <div className={styles.postBtn} onClick={onClick}>
       <figure>
-        <Image src={userAuth.photoURL || '/images/user-default.png'} alt="" width={40} height={40} />
+        <ProfilePhoto src={userAuth.photoURL || '/images/user-default.png'} alt="" width={36} height={36} />
       </figure>
       <div>
         <h3>{userAuth.name}</h3>

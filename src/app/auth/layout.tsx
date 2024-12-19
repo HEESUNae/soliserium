@@ -1,6 +1,6 @@
 import { BackBtn, Header, Logo } from '@/widgets';
 import { ReactNode } from 'react';
-import styles from './page.module.css';
+import styles from './layout.module.css';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (

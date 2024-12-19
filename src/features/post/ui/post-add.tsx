@@ -24,7 +24,7 @@ export const PostAdd = ({ onClick }: PostAddProps) => {
       <div className={styles.contentWrap}>
         <ProfilePhoto src={userAuth.photoURL ?? ''} alt="" width={40} height={40} />
         <div className={styles.inputWrap}>
-          <h2>{userAuth.name}</h2>
+          <p className={styles.userName}>{userAuth.name}</p>
           <div className={styles.photo}>
             <Image src="/images/sample.png" alt="" width={260} height={150} />
           </div>

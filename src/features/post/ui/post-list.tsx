@@ -14,7 +14,7 @@ export const PostList = ({ data }: PostListProps) => {
   return (
     <li className={styles.postList}>
       <figure>
-        <ProfilePhoto src={'/images/user-default.png'} alt="" width={40} height={40} />
+        <ProfilePhoto src={'/images/user-default.png'} alt="" width={36} height={36} />
       </figure>
       <div>
         <h3>{data.uid}</h3>

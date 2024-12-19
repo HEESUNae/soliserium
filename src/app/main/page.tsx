@@ -85,7 +85,7 @@ export default function MainPage() {
 
   const tabs = [
     { id: 1, title: '전체 고민' },
-    { id: 2, title: '내가 좋아하는 고민' },
+    { id: 2, title: '내가 작성한 고민' },
   ];
   const [selectedTab, setSelectedTab] = useState(1);
 

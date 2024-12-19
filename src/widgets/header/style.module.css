@@ -2,9 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.2rem 2rem;
-  border-bottom: 0.1rem solid var(--color-lightGray);
-  height: 6rem;
+  padding: 1.2rem 1.4rem;
+  /* border-bottom: 0.1rem solid var(--color-lightGray); */
+  height: 5.2rem;
   position: relative;
 }
 .between {

@@ -6,11 +6,11 @@
   height: 100vh;
 }
 .snsBtnsWrap {
-  margin-top: 5rem;
+  margin-top: 3rem;
   display: grid;
   gap: 1rem;
   width: 100%;
   border-top: 0.1rem solid #eee;
-  padding-top: 2.4rem;
+  padding-top: 3rem;
   font-size: 1.4rem;
 }

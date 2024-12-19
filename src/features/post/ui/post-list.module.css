@@ -1,11 +1,12 @@
 .postList {
-  padding: 1.6rem;
+  padding: 1rem 1.2rem;
   border-radius: 0.4rem;
-  border-bottom: 0.1rem solid var(--color-lightGray);
+  border-bottom: 0.1rem solid #f4f4f4;
   display: flex;
   gap: 1rem;
+  /* background-color: #fdfdfd; */
 }
 
 .postList p {
-  margin: 0.8rem 0;
+  margin-top: 0.2rem;
 }
