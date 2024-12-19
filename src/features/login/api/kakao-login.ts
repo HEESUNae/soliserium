@@ -1,12 +1,14 @@
+import { UserInfoType } from '@/entities';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
 const REDIRECT_URI = `${process.env.NEXT_PUBLIC_HOST_URL}/login`;
 
 interface KakaoJwtPayload {
-  sub?: string;
-  nickname?: string;
-  picture?: string;
+  sub: string;
+  nickname: string;
+  picture: string;
+  email: string;
 }
 
 // 인가코드 가져오기
@@ -16,7 +18,7 @@ export const getKakaoAuthCode = async () => {
 };
 
 // 토큰으로 사용자 정보 가져오기
-export const getKakaoToken = async (code: string) => {
+export const getKakaoToken = async (code: string): Promise<UserInfoType> => {
   try {
     const { data } = await axios.post(
       `https://kauth.kakao.com/oauth/token`,
@@ -38,7 +40,7 @@ export const getKakaoToken = async (code: string) => {
       accessToken: data.access_token,
       id: user.sub,
       name: user.nickname,
-      email: 'kakao',
+      email: user.email,
       photoURL: user.picture,
       providerId: 'kakao',
     };

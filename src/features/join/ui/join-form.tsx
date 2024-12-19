@@ -1,12 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { FirebaseError } from 'firebase/app';
+import styles from './join-form.module.css';
+import { checkRegex, getErrorMessage } from '../model/auth-join';
 import { Button, File, Input } from '@/shared';
 import { Loading } from '@/widgets';
-import { FirebaseError } from 'firebase/app';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { checkRegex, getErrorMessage, updateUser } from '../model/auth-join';
-import styles from './join-form.module.css';
+import { updateUser } from '@/entities';
 
 export const JoinForm = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -28,14 +29,14 @@ export const JoinForm = () => {
       await updateUser(userId, userPW, userName, userProfile);
 
       router.push('/login');
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof FirebaseError) {
         const errorMsg = getErrorMessage(error.code);
-        alert(`회원가입에 실패했습니다. ${errorMsg}`);
-        setDisabled(true);
-        setUploadImg('');
-        setFormCheck({ profile: false, id: false, name: false, pw: false });
+        alert(`${errorMsg}`);
       }
+      setDisabled(true);
+      setUploadImg('');
+      setFormCheck({ profile: false, id: false, name: false, pw: false });
     } finally {
       setIsLoading(false);
     }
