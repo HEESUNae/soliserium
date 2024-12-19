@@ -32,3 +32,16 @@ export const updateUserInfo = async (user: User, userName: string, userProfile: 
     providerId: user.providerId,
   });
 };
+
+// 파이어베이스 에러 실패 알림메세지
+export const getErrorMessage = (code: string): string => {
+  const messages: Record<string, string> = {
+    'auth/email-already-in-use': '이미 가입되어 있는 이메일 입니다.',
+    'Error: Email not verified': '이메일 인증을 완료한 후에 로그인 가능합니다.',
+    'auth/invalid-email': '유효하지 않은 이메일 형식입니다.',
+    'auth/weak-password': '비밀번호는 최소 6자 이상이어야 합니다.',
+    'auth/operation-not-allowed': '이메일/비밀번호로 회원가입이 허용되지 않습니다.',
+    default: '아이디 또는 비밀번호를 확인해주세요',
+  };
+  return messages[code] || messages.default;
+};

@@ -1,0 +1,8 @@
+.form {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+.form input {
+  width: 100%;
+}

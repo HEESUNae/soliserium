@@ -17,7 +17,6 @@ interface InputProps {
 export const Input = ({ value, isVaild, errorMsg, onChange, ...rest }: InputProps) => {
   const [inputValue, setInputValue] = useState<string>('');
 
-  // 정규식 체크
   const checkRegexp = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     onChange?.(e);

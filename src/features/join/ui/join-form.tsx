@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import styles from './join-form.module.css';
-import { checkRegex, getErrorMessage } from '../model/auth-join';
-import { Button, File, Input } from '@/shared';
+import { Button, File, Input, checkRegex } from '@/shared';
 import { Loading } from '@/widgets';
-import { updateUser } from '@/entities';
+import { getErrorMessage, updateUser } from '@/entities';
 
 export const JoinForm = () => {
   const [disabled, setDisabled] = useState<boolean>(true);

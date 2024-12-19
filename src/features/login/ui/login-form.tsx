@@ -1,11 +1,11 @@
 'use client';
 
-import { useIdSaveStore, useUserAuthStore } from '@/entities';
+import { getErrorMessage, useIdSaveStore, useUserAuthStore } from '@/entities';
 import { Button, Checkbox, Input } from '@/shared';
 import { FirebaseError } from 'firebase/app';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getCheckUser, getErrorMessage } from '../model/auth-login';
+import { getCheckUser } from '../model/auth-login';
 import styles from './login-form.module.css';
 
 export const LoginForm = () => {

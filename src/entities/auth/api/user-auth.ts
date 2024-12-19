@@ -1,6 +1,6 @@
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getErrorMessage } from '@/features';
+import { getErrorMessage } from '../model/user-auth';
 import { auth } from '@/shared';
 
 // 회원 생성
