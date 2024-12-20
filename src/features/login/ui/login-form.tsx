@@ -1,18 +1,20 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FirebaseError } from 'firebase/app';
+import styles from './login-form.module.css';
+import { getCheckUser } from '../model/auth-login';
 import { getErrorMessage, useIdSaveStore, useUserAuthStore } from '@/entities';
 import { Button, Checkbox, Input } from '@/shared';
-import { FirebaseError } from 'firebase/app';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { getCheckUser } from '../model/auth-login';
-import styles from './login-form.module.css';
 
 export const LoginForm = () => {
   const { savedId, setSavedId } = useIdSaveStore();
   const [idValue, setIdValue] = useState<string>('');
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const { setUserAuth } = useUserAuthStore();
+  const router = useRouter();
 
   // 로그인
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,6 +29,7 @@ export const LoginForm = () => {
       if (user) {
         setUserAuth(user);
         saveUserId(userId);
+        router.push('/home');
       }
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {

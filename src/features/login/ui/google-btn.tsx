@@ -14,7 +14,7 @@ export const GoogleBtn = () => {
   return (
     <Button onClick={googleLogin}>
       <div className={styles.googleLoginBtn}>
-        <Image src="/icons/logo-google.svg" alt="" width={24} height={24} />
+        <Image src="/icons/logo/google.svg" alt="" width={24} height={24} />
         <p>Sign in with Google</p>
       </div>
     </Button>

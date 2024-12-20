@@ -1,0 +1,12 @@
+.main {
+  position: relative;
+}
+.logo {
+  font-size: 2rem;
+}
+.listWrap {
+  min-width: -webkit-fill-available;
+}
+.listWrap::-webkit-scrollbar {
+  width: 0;
+}
