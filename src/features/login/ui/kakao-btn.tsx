@@ -26,7 +26,7 @@ export const KakaoBtn = () => {
   return (
     <Button onClick={getKakaoAuthCode}>
       <div className={styles.kakaoBtn}>
-        <Image src="/icons/logo-kakao.svg" alt="" width={20} height={20} />
+        <Image src="/icons/logo/kakao.svg" alt="" width={20} height={20} />
         <p>Sign in with Kakao</p>
       </div>
     </Button>

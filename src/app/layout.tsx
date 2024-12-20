@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 import './globals.css';
 import { AuthProvider } from '@/shared/providers/auth-provider';
 
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>
         <AuthProvider>{children}</AuthProvider>
       </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" />
     </html>
   );
 }

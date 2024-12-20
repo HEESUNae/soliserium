@@ -9,11 +9,11 @@
 .checkbox label::before {
   content: '';
   display: inline-block;
-  background: url('/icons/check-box-empty.svg') no-repeat 50% 50%;
+  background: url('/icons/shared/check-box-empty.svg') no-repeat 50% 50%;
   background-size: cover;
 }
 .checkbox input:checked + label::before {
-  background: url('/icons/check-box-fill.svg') no-repeat 50% 50%;
+  background: url('/icons/shared/check-box-fill.svg') no-repeat 50% 50%;
   background-size: cover;
 }
 

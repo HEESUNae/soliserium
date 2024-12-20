@@ -8,3 +8,5 @@ export { Logout } from './logout/ui/logout';
 export { PostBtn } from './post/ui/post-btn';
 export { PostAdd } from './post/ui/post-add';
 export { PostList } from './post/ui/post-list';
+
+export { useOpenPostAddStore } from './post/model/open-post-add-store';

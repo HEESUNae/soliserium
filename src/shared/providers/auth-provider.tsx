@@ -14,14 +14,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const path = usePathname();
 
   useEffect(() => {
-    if (path.includes('/auth')) return;
+    const notcheck = ['login', 'auth', 'find'].some((item) => item.includes(path));
+    if (notcheck) return;
 
-    if (userAuth.accessToken) {
-      router.push('/main');
-    } else {
+    if (!userAuth.accessToken) {
       router.push('/login');
     }
-  }, [userAuth]);
+  }, [userAuth, window.location]);
 
   return <>{children}</>;
 };

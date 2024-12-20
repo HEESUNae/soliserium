@@ -18,7 +18,7 @@ export const BackBtn = ({ onClick }: BackBtnProps) => {
 
   return (
     <Button className="back" onClick={handleBack}>
-      <Image src="/icons/arrow-back.svg" alt="뒤로가기" width={24} height={24} />
+      <Image src="/icons/shared/arrow-back.svg" alt="뒤로가기" width={24} height={24} />
     </Button>
   );
 };
