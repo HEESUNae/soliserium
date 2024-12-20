@@ -5,7 +5,7 @@ import { DocumentData } from 'firebase/firestore';
 import styles from './page.module.css';
 import { PostListType } from '@/entities';
 import { PostBtn, PostList, useOpenPostAddStore, fetchGetAllPost } from '@/features';
-import { Tab } from '@/widgets';
+import { Loading, Tab } from '@/widgets';
 
 const listData = [{ id: '1', name: 'sss', photoUrl: '/images/user-default.svg', content: '123', uid: '123', createAt: '2024-12-12' }];
 
@@ -26,6 +26,8 @@ export default function MainPage({}) {
     };
     getPost();
   }, [isOpen]);
+
+  if (!allPostList) return <Loading />;
 
   return (
     <div className={styles.main}>

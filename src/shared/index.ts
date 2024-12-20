@@ -9,3 +9,6 @@ export { auth } from './providers/firebase';
 
 // model
 export { checkRegex } from './model/regex';
+
+// lib
+export { getDayjsTime } from './lib/dayjs';

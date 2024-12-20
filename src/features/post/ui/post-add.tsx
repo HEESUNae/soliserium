@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dayjs from 'dayjs';
 import styles from './post-add.module.css';
 import { useOpenPostAddStore } from '../model/open-post-add-store';
-import { fetchAddPost } from '../api/add-post';
+import { fetchAddPost } from '../../../entities/post/api/add-post';
 import { Button, Textarea } from '@/shared';
 import { BottomSheet, ProfilePhoto } from '@/widgets';
 import { useUserAuthStore } from '@/entities';
@@ -16,12 +16,14 @@ export const PostAdd = () => {
   const [textareaValue, setTextareaValue] = useState<string>('');
 
   const handleAddPost = async () => {
+    const now = dayjs();
+    const createTimestemp = dayjs(now).valueOf();
     try {
       const postData = {
         uid: userAuth.uid,
         name: userAuth.name,
         photoUrl: userAuth.photoURL,
-        createAt: dayjs().format('YYYY-MM-DD:mm:ss'),
+        createAt: createTimestemp,
         content: textareaValue,
       };
       await fetchAddPost(postData);

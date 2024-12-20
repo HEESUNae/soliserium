@@ -22,7 +22,6 @@ export const fetchGetAllPost = async () => {
       ...doc.data(),
       id: doc.id,
     }));
-
     return posts;
   } catch (e) {
     console.log(e);

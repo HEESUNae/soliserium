@@ -11,6 +11,7 @@
 }
 .tabContent {
   overflow: hidden;
+  margin-bottom: 5rem;
 }
 .tabRoller {
   display: flex;
