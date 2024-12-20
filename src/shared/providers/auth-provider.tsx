@@ -17,10 +17,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const notcheck = ['login', 'auth', 'find'].some((item) => item.includes(path));
     if (notcheck) return;
 
-    if (!userAuth.accessToken) {
+    if (userAuth.accessToken === 'undefind' || !userAuth.accessToken) {
       router.push('/login');
     }
-  }, [userAuth, window.location]);
+  }, [userAuth]);
 
   return <>{children}</>;
 };
