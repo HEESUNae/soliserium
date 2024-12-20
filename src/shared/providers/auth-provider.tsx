@@ -14,10 +14,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const path = usePathname();
 
   useEffect(() => {
-    const notcheck = ['login', 'auth', 'find'].some((item) => item.includes(path));
-    if (notcheck) return;
+    if (userAuth.accessToken === null) {
+      const notcheck = ['/auth', '/find'].some((item) => item.includes(path));
+      if (notcheck) return;
 
-    if (userAuth.accessToken === 'undefind' || !userAuth.accessToken) {
+      alert('로그인 시간이 만료되었습니다.');
       router.push('/login');
     }
   }, [userAuth]);

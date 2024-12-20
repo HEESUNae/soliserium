@@ -4,86 +4,87 @@ import styles from './page.module.css';
 import { PostBtn, PostList, useOpenPostAddStore } from '@/features';
 import { Tab } from '@/widgets';
 
-const listData = [
-  {
-    id: 1,
-    photoUrl: '/icons/user-default.svg',
-    uid: '곰돌이',
-    content: '내용',
-  },
-  {
-    id: 2,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 3,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 4,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 5,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 6,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 7,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 8,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 9,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 10,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 11,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 12,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-  {
-    id: 13,
-    photoUrl: '/icons/user-default.svg',
-    uid: '토끼',
-    content: '내용2',
-  },
-];
+const listData: any = [];
+// const listData = [
+//   {
+//     id: 1,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '곰돌이',
+//     content: '내용',
+//   },
+//   {
+//     id: 2,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 3,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 4,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 5,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 6,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 7,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 8,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 9,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 10,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 11,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 12,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+//   {
+//     id: 13,
+//     photoUrl: '/icons/user-default.svg',
+//     uid: '토끼',
+//     content: '내용2',
+//   },
+// ];
 
 const tabBtns = [
   { id: 1, title: '전체 고민' },
@@ -98,12 +99,12 @@ export default function MainPage({}) {
       <PostBtn onClick={() => setIsOpen(true)} />
       <Tab data={tabBtns}>
         <ul className={styles.listWrap}>
-          {listData.map((list) => (
+          {listData.map((list: any) => (
             <PostList data={list} key={list.id} />
           ))}
         </ul>
         <ul className={styles.listWrap}>
-          {listData.map((list) => (
+          {listData.map((list: any) => (
             <PostList data={list} key={list.id} />
           ))}
         </ul>

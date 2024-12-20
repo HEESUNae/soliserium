@@ -5,17 +5,19 @@ import Image from 'next/image';
 import styles from './kakao-btn.module.css';
 import { Button } from '@/shared';
 import { getKakaoAuthCode, getKakaoToken } from '../api/kakao-login';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useUserAuthStore } from '@/entities';
 
 export const KakaoBtn = () => {
   const code = useSearchParams().get('code') || '';
   const { setUserAuth } = useUserAuthStore();
+  const router = useRouter();
 
   const handleUserAuth = async () => {
     if (code) {
       const data = await getKakaoToken(code);
       setUserAuth(data);
+      router.push('/home');
     }
   };
 

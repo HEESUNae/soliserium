@@ -5,11 +5,13 @@ import { auth } from '@/shared';
 import { useGoogleLogin } from '@react-oauth/google';
 import { signInWithCredential } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth/web-extension';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export const useGoogleAuth = () => {
   const { setUserAuth } = useUserAuthStore();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const googleLogin = useGoogleLogin({
     onSuccess: async (res) => {
@@ -30,6 +32,7 @@ export const useGoogleAuth = () => {
             providerId: 'google',
           };
           setUserAuth(userData);
+          router.push('/home');
         }
       } catch (error) {
         setIsLoading(false);
