@@ -5,11 +5,12 @@ import styles from './styles.module.css';
 import { Button } from '@/shared';
 
 interface TabProps {
-  data: { id: number; title: string }[];
+  tabBtns: { id: number; title: string }[];
   children?: ReactNode;
+  onClick?: () => void;
 }
 
-export const Tab = ({ data, children }: TabProps) => {
+export const Tab = ({ tabBtns, children, onClick }: TabProps) => {
   const [selectedTab, setSelectedTab] = useState(1);
   const selectedTabRef = useRef<null | HTMLDivElement>(null);
 
@@ -21,12 +22,19 @@ export const Tab = ({ data, children }: TabProps) => {
     }
   }, [selectedTab]);
 
+  const handleTabBtn = (tabId: number) => {
+    setSelectedTab(tabId);
+
+    // 탭을 클릭했을때 탭버튼 위치로 스크롤 변경
+    onClick?.();
+  };
+
   return (
     <>
       <div className={styles.nav}>
         <div className={styles.tabWrap}>
-          {data.map((item) => (
-            <Button key={item.id} className={item.id === selectedTab ? 'bottomLine' : ''} onClick={() => setSelectedTab(item.id)}>
+          {tabBtns.map((item) => (
+            <Button key={item.id} className={item.id === selectedTab ? 'bottomLine' : ''} onClick={() => handleTabBtn(item.id)}>
               {item.title}
             </Button>
           ))}

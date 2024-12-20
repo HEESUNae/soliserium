@@ -58,7 +58,7 @@ export const PostAdd = () => {
               {/* <div className={styles.photo}>
                 <Image src="/images/sample.png" alt="" width={260} height={150} />
               </div> */}
-              <Textarea placeholder="고민을 입력해주세요" onChange={handleTextareaValue} />
+              <Textarea placeholder="여기에 고민을 적어보세요" onChange={handleTextareaValue} />
             </div>
           </div>
           <div className={styles.buttonBtnWrap}>

@@ -15,7 +15,7 @@
 }
 .tabRoller {
   display: flex;
-  transition: 0.3s;
+  transition: transform 0.3s;
 }
 .nav {
   position: sticky;

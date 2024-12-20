@@ -12,6 +12,18 @@
 .nav > div {
   cursor: pointer;
 }
+.nav a {
+  background-color: #fff;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 50%;
+}
+.nav a:nth-child(3) {
+  background: #333;
+}
 .nav p {
   font-size: 1rem;
   color: #aeaeae;

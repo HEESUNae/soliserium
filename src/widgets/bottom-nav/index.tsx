@@ -40,9 +40,9 @@ const bottomNavs = [
     href: '/lucky',
   },
   {
-    title: '작성',
+    title: null,
     name: 'write',
-    size: 22,
+    size: 20,
     href: null,
   },
   {

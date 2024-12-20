@@ -18,7 +18,7 @@ export const PostBtn = ({ onClick }: PostBtnProps) => {
       </figure>
       <div>
         <h3>{userAuth.name}</h3>
-        <p>고민을 적어보세요</p>
+        <p>여기에 고민을 적어보세요</p>
       </div>
     </div>
   );

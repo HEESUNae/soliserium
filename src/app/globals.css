@@ -6,7 +6,7 @@
 }
 html {
   font-size: 10px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 * {
   margin: 0;

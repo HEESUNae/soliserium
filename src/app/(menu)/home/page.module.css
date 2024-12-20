@@ -6,6 +6,8 @@
 }
 .listWrap {
   min-width: -webkit-fill-available;
+  overflow-y: auto;
+  height: calc(100vh - 21rem);
 }
 .listWrap::-webkit-scrollbar {
   width: 0;
