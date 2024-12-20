@@ -1,18 +1,31 @@
-import { UserInfoType, getErrorMessage } from '@/entities';
 import { db } from '@/shared/providers/firebase';
-import { error } from 'console';
-import { FirebaseError } from 'firebase/app';
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { UserInfoType } from '@/entities';
 
-export const fetchAddPost = async (userId: string, data: UserInfoType) => {
+// 포스트 작성
+export const fetchAddPost = async (data: UserInfoType) => {
   try {
-    await setDoc(doc(db, 'posts', userId), data);
-    alert('작성이 완료되었습니다.');
+    await addDoc(collection(db, 'posts'), data);
+  } catch (error: unknown) {
+    console.log(error);
+  }
+};
+
+// 포스트 리스트 가져오기
+export const fetchGetAllPost = async () => {
+  try {
+    const citiesRef = collection(db, 'posts');
+    const q = query(citiesRef, orderBy('createAt', 'desc'));
+
+    const querySnapshot = await getDocs(q);
+    const posts = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+
+    return posts;
   } catch (e) {
-    if (error instanceof FirebaseError) {
-      console.log(error.code);
-      // const errorMsg = getErrorMessage(error.code);
-      // alert(`${errorMsg}`);
-    }
+    console.log(e);
+    return null;
   }
 };

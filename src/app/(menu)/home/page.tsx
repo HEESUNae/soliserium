@@ -1,90 +1,13 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { DocumentData } from 'firebase/firestore';
 import styles from './page.module.css';
-import { PostBtn, PostList, useOpenPostAddStore } from '@/features';
+import { PostListType } from '@/entities';
+import { PostBtn, PostList, useOpenPostAddStore, fetchGetAllPost } from '@/features';
 import { Tab } from '@/widgets';
 
-const listData: any = [];
-// const listData = [
-//   {
-//     id: 1,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '곰돌이',
-//     content: '내용',
-//   },
-//   {
-//     id: 2,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 3,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 4,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 5,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 6,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 7,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 8,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 9,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 10,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 11,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 12,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-//   {
-//     id: 13,
-//     photoUrl: '/icons/user-default.svg',
-//     uid: '토끼',
-//     content: '내용2',
-//   },
-// ];
+const listData = [{ id: '1', name: 'sss', photoUrl: '/images/user-default.svg', content: '123', uid: '123', createAt: '2024-12-12' }];
 
 const tabBtns = [
   { id: 1, title: '전체 고민' },
@@ -92,23 +15,53 @@ const tabBtns = [
 ];
 
 export default function MainPage({}) {
-  const { setIsOpen } = useOpenPostAddStore();
+  const { isOpen, setIsOpen } = useOpenPostAddStore();
+  const [allPostList, setAllPostList] = useState<null | DocumentData>(null);
+
+  // 리스트 표출
+  useEffect(() => {
+    const getPost = async () => {
+      const posts = await fetchGetAllPost();
+      if (posts) setAllPostList(posts);
+    };
+    getPost();
+  }, [isOpen]);
 
   return (
     <div className={styles.main}>
       <PostBtn onClick={() => setIsOpen(true)} />
       <Tab data={tabBtns}>
-        <ul className={styles.listWrap}>
-          {listData.map((list: any) => (
-            <PostList data={list} key={list.id} />
-          ))}
-        </ul>
-        <ul className={styles.listWrap}>
-          {listData.map((list: any) => (
-            <PostList data={list} key={list.id} />
-          ))}
-        </ul>
+        <>
+          {allPostList?.length ? (
+            <ul className={styles.listWrap}>
+              {allPostList?.map((list: PostListType) => (
+                <PostList data={list} key={list.id} />
+              ))}
+            </ul>
+          ) : (
+            <NotData />
+          )}
+
+          {listData.length ? (
+            <ul className={styles.listWrap}>
+              {listData.map((list: PostListType) => (
+                <PostList data={list} key={list.id} />
+              ))}
+            </ul>
+          ) : (
+            <NotData />
+          )}
+        </>
       </Tab>
+    </div>
+  );
+}
+
+function NotData() {
+  return (
+    <div className={styles.notData}>
+      작성된 글이 없습니다.
+      <br /> 첫번째 작성자가 되어주세요.
     </div>
   );
 }

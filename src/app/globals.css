@@ -12,11 +12,11 @@ html {
   margin: 0;
   padding: 0;
   font-size: 1.4rem;
-  box-sizing: border-box;
   font-family: var(--font-pretendard);
   color: var(--color-black);
   outline: none;
   box-sizing: border-box;
+  line-height: 1.4;
 }
 a {
   text-decoration: none;

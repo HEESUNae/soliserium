@@ -10,3 +10,18 @@
 .listWrap::-webkit-scrollbar {
   width: 0;
 }
+.notData {
+  min-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  text-align: center;
+  color: #666;
+}
+
+@media (min-width: 700px) {
+  .notData {
+    min-width: 35rem;
+  }
+}

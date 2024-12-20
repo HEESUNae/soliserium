@@ -4,9 +4,23 @@
   border-bottom: 0.1rem solid #f4f4f4;
   display: flex;
   gap: 1rem;
-  /* background-color: #fdfdfd; */
 }
 
 .postList p {
   margin-top: 0.2rem;
+}
+.listTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.listTitle .date {
+  color: #666;
+  font-size: 1.2rem;
+}
+.postContent {
+  flex-grow: 2;
+}
+.postContent p {
+  white-space: break-spaces;
 }

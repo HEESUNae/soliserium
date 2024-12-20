@@ -1,4 +1,3 @@
-import { Button } from '@/shared';
 import { motion } from 'motion/react';
 import { ReactNode } from 'react';
 import { Header } from '..';
@@ -27,12 +26,7 @@ export const BottomSheet = ({ children, title, left, right }: BottomSheetProps) 
           <h2>{title}</h2>
           {right}
         </Header>
-        <div className={styles.content}>
-          {children}
-          <div className={styles.buttonBtnWrap}>
-            <Button className="fill">등록하기</Button>
-          </div>
-        </div>
+        <div className={styles.content}>{children}</div>
       </motion.div>
     </div>
   );
