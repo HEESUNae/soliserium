@@ -2,13 +2,21 @@ import { User, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/shared/providers/firebase';
 import { auth } from '@/shared';
-import { getErrorMessage } from '@/entities';
+import { getErrorMessage, setCookie } from '@/entities';
+
+interface UserType extends User {
+  stsTokenManager: {
+    accessToken: string;
+    expirationTime: number;
+    refreshToken: string;
+  };
+}
 
 // 로그인시 기존 회원인지 체크
 export const getCheckUser = async (userId: string, userPw: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, userId, userPw);
-    const user = userCredential.user as User;
+    const user = userCredential.user as UserType;
 
     // 이메일 인증 안된 계정은 로그인 못함
     if (!user.emailVerified) {
@@ -16,8 +24,8 @@ export const getCheckUser = async (userId: string, userPw: string) => {
     }
     const accessToken = await user.getIdToken();
     const userInfo = await getUserInfo(user);
-
-    return { accessToken, ...userInfo };
+    setCookie('accessToken', accessToken, user.stsTokenManager.expirationTime);
+    return userInfo;
   } catch (error) {
     const errorMsg = getErrorMessage(error as string);
     alert(`${errorMsg}`);

@@ -1,20 +1,15 @@
 'use client';
 
-import { kakaoLogout } from '@/features/logout/api/kakao-logout';
-import { useUserAuthStore } from '@/entities';
-import { useRouter } from 'next/navigation';
+import { setCookie, useUserAuthStore } from '@/entities';
 import { Button } from '@/shared';
+import { useRouter } from 'next/navigation';
 
 export const Logout = () => {
-  const { userAuth } = useUserAuthStore();
   const router = useRouter();
 
   const handleLogout = async () => {
-    // 카카오일때
-    if (userAuth.accessToken && userAuth.providerId === 'kakao') {
-      kakaoLogout(userAuth.accessToken);
-    }
     useUserAuthStore.persist.clearStorage();
+    setCookie('accessToken', '', 0);
     router.push('/login');
   };
 

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import './globals.css';
-import { AuthProvider } from '@/shared/providers/auth-provider';
 
 const pretendard = localFont({
   src: '../shared/fonts/PretendardVariable.woff2',
@@ -33,9 +32,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
       </head>
-      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>
-        <AuthProvider>{children}</AuthProvider>
-      </body>
+      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>{children}</body>
       <Script src="https://developers.kakao.com/sdk/js/kakao.js" />
     </html>
   );

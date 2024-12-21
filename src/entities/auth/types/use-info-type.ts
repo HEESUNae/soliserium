@@ -1,5 +1,4 @@
 export interface UserInfoType {
-  accessToken?: string;
   name?: string;
   email?: string;
   photoURL?: string;

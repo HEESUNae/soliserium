@@ -1,4 +1,4 @@
-import { UserInfoType } from '@/entities';
+import { UserInfoType, setCookie } from '@/entities';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
@@ -34,10 +34,9 @@ export const getKakaoToken = async (code: string): Promise<UserInfoType> => {
         },
       }
     );
-
     const user = jwtDecode<KakaoJwtPayload>(data.id_token);
+    setCookie('accessToken', data.access_token, data.expires_in);
     const userData = {
-      accessToken: data.access_token,
       uid: user.sub,
       name: user.nickname,
       email: user.email,

@@ -1,12 +1,21 @@
 'use client';
 
-import { useUserAuthStore } from '@/entities';
+import { setCookie, useUserAuthStore } from '@/entities';
 import { auth } from '@/shared';
 import { useGoogleLogin } from '@react-oauth/google';
-import { signInWithCredential } from 'firebase/auth';
+import { User, signInWithCredential } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth/web-extension';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+interface UserType extends User {
+  accessToken: string;
+  stsTokenManager: {
+    accessToken: string;
+    expirationTime: number;
+    refreshToken: string;
+  };
+}
 
 export const useGoogleAuth = () => {
   const { setUserAuth } = useUserAuthStore();
@@ -20,15 +29,15 @@ export const useGoogleAuth = () => {
         setIsLoading(true);
         const credential = GoogleAuthProvider.credential(null, access_token);
         const userCredential = await signInWithCredential(auth, credential);
-        const result = userCredential.user;
+        const user = userCredential.user as UserType;
 
-        if (result) {
+        setCookie('accessToken', user.accessToken, user.stsTokenManager.expirationTime);
+        if (user) {
           const userData = {
-            accessToken: access_token,
-            uid: result.uid!,
-            name: result.displayName!,
-            email: result.email!,
-            photoURL: result.photoURL!,
+            uid: user.uid!,
+            name: user.displayName!,
+            email: user.email!,
+            photoURL: user.photoURL!,
             providerId: 'google',
           };
           setUserAuth(userData);
