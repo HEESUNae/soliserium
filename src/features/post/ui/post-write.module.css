@@ -1,0 +1,23 @@
+.contentWrap {
+  display: flex;
+  gap: 1rem;
+  height: inherit;
+}
+.contentWrap .photo {
+  margin: 0.8rem 0;
+}
+.contentWrap .inputWrap {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+}
+.contentWrap .inputWrap .userName {
+  font-weight: 600;
+}
+
+.contentWrap .inputWrap textarea {
+  margin-top: 0.8rem;
+  height: -webkit-fill-available;
+  flex-grow: 2;
+  border: 0;
+}

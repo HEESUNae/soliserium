@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import styles from './login-form.module.css';
 import { getCheckUser } from '../model/auth-login';
-import { getErrorMessage, useIdSaveStore, useUserAuthStore } from '@/entities';
+import { useIdSaveStore } from '../model/id-save-store';
+import { getErrorMessage, useUserAuthStore } from '@/entities';
 import { Button, Checkbox, Input } from '@/shared';
 
 export const LoginForm = () => {

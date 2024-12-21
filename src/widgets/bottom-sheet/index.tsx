@@ -24,7 +24,7 @@ export const BottomSheet = ({ children, title, left, right }: BottomSheetProps) 
         <Header>
           {left}
           <h2>{title}</h2>
-          {right}
+          {right ? right : <div className={styles.visibility}></div>}
         </Header>
         <div className={styles.content}>{children}</div>
       </motion.div>

@@ -9,6 +9,10 @@
   justify-content: space-between;
   border-bottom: 0.1rem solid var(--color-lightGray);
 }
+.bottomSheet .visibility {
+  width: 2.4rem;
+  height: 2.4rem;
+}
 .bottomSheet h2 {
   margin-bottom: 0;
 }

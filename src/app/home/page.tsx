@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import styles from './page.module.css';
-import { PostListType, useUserAuthStore } from '@/entities';
-import { PostBtn, PostList, useOpenPostAddStore, fetchGetAllPost } from '@/features';
+import { PostListType, useUserAuthStore, fetchGetAllPost } from '@/entities';
+import { PostBtn, useOpenPostAddStore } from '@/features';
 import { Loading, Tab } from '@/widgets';
+import { PostList } from './post-list';
 
 const tabBtns = [
   { id: 1, title: '전체 고민' },
@@ -24,9 +25,7 @@ export default function MainPage() {
       const posts = await fetchGetAllPost();
       if (posts) {
         setAllPostList(posts);
-        console.log(posts);
         const myPosts = posts.filter((item: DocumentData) => item.uid === userAuth.uid);
-        console.log(myPosts);
         setMyPostList(myPosts);
       }
     };
