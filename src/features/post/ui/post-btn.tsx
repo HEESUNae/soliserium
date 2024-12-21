@@ -3,16 +3,14 @@
 import styles from './post-btn.module.css';
 import { useUserAuthStore } from '@/entities';
 import { ProfilePhoto } from '@/widgets';
+import { useOpenPostAddStore } from '../model/open-post-add-store';
 
-interface PostBtnProps {
-  onClick: () => void;
-}
-
-export const PostBtn = ({ onClick }: PostBtnProps) => {
+export const PostBtn = () => {
   const { userAuth } = useUserAuthStore();
+  const { setIsOpen } = useOpenPostAddStore();
 
   return (
-    <div className={styles.postBtn} onClick={onClick}>
+    <div className={styles.postBtn} onClick={() => setIsOpen(true)}>
       <figure>
         <ProfilePhoto src={userAuth.photoURL || '/images/user-default.png'} alt="" width={36} height={36} />
       </figure>

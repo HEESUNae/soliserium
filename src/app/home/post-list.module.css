@@ -1,32 +1,19 @@
-.postList {
-  padding: 1rem 1.2rem;
-  border-radius: 0.4rem;
-  border-bottom: 0.1rem solid #f4f4f4;
-  display: flex;
-  gap: 1rem;
-  cursor: pointer;
+.listWrap {
+  min-width: -webkit-fill-available;
+  overflow-y: auto;
+  height: calc(100vh - 21rem);
 }
-
-.postList p {
-  margin-top: 0.2rem;
+.listWrap::-webkit-scrollbar {
+  width: 0;
 }
-.listTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.listTitle .date {
+.notData {
+  min-width: 100vw;
+  margin-top: 5rem;
+  text-align: center;
   color: #666;
-  font-size: 1.2rem;
 }
-.postContent {
-  flex-grow: 2;
-}
-.postContent p {
-  white-space: break-spaces;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
+@media (min-width: 700px) {
+  .notData {
+    min-width: 35rem;
+  }
 }
