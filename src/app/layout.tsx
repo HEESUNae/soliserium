@@ -32,7 +32,11 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
       </head>
-      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>{children}</body>
+      <body className={`${pretendard.variable} ${hakgyoansim.variable}`}>
+        <div className="wrap">
+          <div className="mockup">{children}</div>
+        </div>
+      </body>
       <Script src="https://developers.kakao.com/sdk/js/kakao.js" />
     </html>
   );

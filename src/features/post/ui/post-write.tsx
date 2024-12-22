@@ -6,9 +6,11 @@ import { DocumentData } from 'firebase/firestore';
 import { useState } from 'react';
 import { useOpenPostAddStore } from '../model/open-post-add-store';
 import styles from './post-write.module.css';
+import { fetchUpdatePost } from '@/entities/post/api/update-post';
 
 interface PostWriteProps {
   data?: DocumentData;
+  onClick?: () => void;
 }
 
 export const PostWrite = ({ data }: PostWriteProps) => {
@@ -20,7 +22,9 @@ export const PostWrite = ({ data }: PostWriteProps) => {
     setTextareaValue(e.target.value);
   };
 
+  // 포스트 작성
   const handleAddPost = async () => {
+    if (!textareaValue) return alert('내용을 작성해주세요');
     const now = dayjs();
     const createTimestemp = dayjs(now).valueOf();
     try {
@@ -32,13 +36,26 @@ export const PostWrite = ({ data }: PostWriteProps) => {
         content: textareaValue,
       };
       await fetchAddPost(postData);
-      alert('글 작성이 완료되었습니다.');
       setIsOpen(false);
     } catch (e) {
-      alert('글 작성에 실패했습니다. 다시 시도해주세요.');
+      alert('포스트 작성에 실패했습니다. 다시 시도해주세요.');
       console.log(e);
     }
   };
+
+  const handleUpdatePost = async () => {
+    if (!textareaValue) return alert('내용을 작성해주세요');
+    try {
+      if (data) {
+        await fetchUpdatePost(data.id, textareaValue);
+        setIsOpen(false);
+      }
+    } catch (e) {
+      alert('포스트 수정에 실패했습니다. 다시 시도해주세요.');
+      console.log(e);
+    }
+  };
+
   return (
     <>
       <div className={styles.contentWrap}>
@@ -49,7 +66,7 @@ export const PostWrite = ({ data }: PostWriteProps) => {
         </div>
       </div>
       <div className={styles.buttonBtnWrap}>
-        <Button className="fill" onClick={handleAddPost}>
+        <Button className="fill" onClick={data ? handleUpdatePost : handleAddPost}>
           등록하기
         </Button>
       </div>

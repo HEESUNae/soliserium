@@ -1,7 +1,7 @@
 import { db } from '@/shared/providers/firebase';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
-// 포스트 리스트 전체 가져오기
+// 포스트 전체 가져오기
 export const fetchGetAllPost = async () => {
   try {
     const citiesRef = collection(db, 'posts');

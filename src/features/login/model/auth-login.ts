@@ -1,8 +1,6 @@
 import { User, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/shared/providers/firebase';
 import { auth } from '@/shared';
-import { getErrorMessage, setCookie } from '@/entities';
+import { getErrorMessage, setCookie, fetchUserInfo } from '@/entities';
 
 interface UserType extends User {
   stsTokenManager: {
@@ -23,20 +21,12 @@ export const getCheckUser = async (userId: string, userPw: string) => {
       throw new Error('Email not verified');
     }
     const accessToken = await user.getIdToken();
-    const userInfo = await getUserInfo(user);
+    const userInfo = await fetchUserInfo(user);
     setCookie('accessToken', accessToken, user.stsTokenManager.expirationTime);
     return userInfo;
   } catch (error) {
     const errorMsg = getErrorMessage(error as string);
     alert(`${errorMsg}`);
     console.log('로그인 실패:', error);
-  }
-};
-
-// 기존 유저 정보 가져오기
-export const getUserInfo = async (user: User) => {
-  const docSnap = await getDoc(doc(db, 'users', user.uid));
-  if (docSnap.exists()) {
-    return docSnap.data();
   }
 };

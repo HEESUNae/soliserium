@@ -1,10 +1,10 @@
 'use client';
 
-import styles from './find-pw-form.module.css';
-import { Button, Input, auth, checkRegex } from '@/shared';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './find-pw-form.module.css';
+import { Button, Input, checkRegex } from '@/shared';
+import { fetchFindPw } from '../model/find-pw';
 
 export const FindPwForm = () => {
   const [formCheck, setFormCheck] = useState(false);
@@ -19,7 +19,7 @@ export const FindPwForm = () => {
         const userId = formData.get('uid')?.toString() ?? '';
 
         if (userId) {
-          await sendPasswordResetEmail(auth, userId);
+          await fetchFindPw(userId);
           alert('비밀번호 재설정 이메일이 전송되었습니다. 이메일을 확인해주세요.');
           router.push('/login');
         }
@@ -31,6 +31,7 @@ export const FindPwForm = () => {
     [formCheck]
   );
 
+  // 정규식 체크
   const handleFormCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checkRegexp = checkRegex('uid', e.target.value);
     setFormCheck(checkRegexp);

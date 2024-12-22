@@ -17,7 +17,7 @@ export const Tab = ({ tabBtns, children, onClick }: TabProps) => {
   // 탭 변경시 좌우 컨텐츠 이동
   useEffect(() => {
     if (selectedTabRef.current) {
-      const bodyWidth = document.querySelector('body')?.getBoundingClientRect().width;
+      const bodyWidth = selectedTabRef.current?.getBoundingClientRect().width;
       selectedTabRef.current.style.transform = `translateX(${selectedTab === 1 ? '0px' : `-${bodyWidth}px`})`;
     }
   }, [selectedTab]);

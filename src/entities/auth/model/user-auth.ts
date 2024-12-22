@@ -1,20 +1,28 @@
 import { User, sendEmailVerification } from 'firebase/auth';
-import { fetchCreateUser } from '../api/user-auth';
+import { fetchCreateUser } from '../api/create-user';
 import { getProfileImg } from '@/features/join/api/upload-img';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '@/shared/providers/firebase';
+import { FirebaseError } from 'firebase/app';
 
 // 회원가입
 export const updateUser = async (userId: string, userPW: string, userName: string, userProfile: File) => {
-  const user = await fetchCreateUser(userId, userPW);
+  try {
+    const user = await fetchCreateUser(userId, userPW);
 
-  if (user) {
-    // 회원가입시 다른정보도 내용 저장
-    await updateUserInfo(user, userName, userProfile);
+    if (user) {
+      // 회원가입시 다른정보도 내용 저장
+      await updateUserInfo(user, userName, userProfile);
 
-    // 이메일 인증 링크 전송
-    await sendEmailVerification(user);
-    alert('회원가입이 완료되었습니다. 이메일 인증 링크를 인증후에 로그인 가능합니다.');
+      // 이메일 인증 링크 전송
+      await sendEmailVerification(user);
+      alert('회원가입이 완료되었습니다. 이메일 인증 링크를 인증후에 로그인 가능합니다.');
+    }
+  } catch (error) {
+    if (error instanceof FirebaseError) {
+      const errorMsg = getErrorMessage(error.code);
+      alert(`${errorMsg}`);
+    }
   }
 };
 

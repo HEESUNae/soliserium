@@ -60,3 +60,9 @@
 .bottomBtns {
   margin: 2rem 1.2rem;
 }
+
+@media (min-width: 700px) {
+  .contentWrap {
+    height: calc(66.7rem - 20rem);
+  }
+}

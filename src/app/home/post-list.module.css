@@ -14,6 +14,9 @@
 }
 @media (min-width: 700px) {
   .notData {
-    min-width: 35rem;
+    min-width: 37.5rem;
+  }
+  .listWrap {
+    height: calc(66.7rem - 21rem);
   }
 }

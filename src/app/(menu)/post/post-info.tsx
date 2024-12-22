@@ -10,15 +10,25 @@ import { Button, getDayjsTime } from '@/shared';
 import { fetchGetPost, useUserAuthStore } from '@/entities';
 import { PostWrite } from '@/features/post/ui/post-write';
 import { useOpenPostAddStore } from '@/features';
+import { fetchDeletePost } from '@/entities/post/api/delete-post';
+import { useRouter } from 'next/navigation';
 
 export const PostInfo = () => {
   const { isOpen, setIsOpen } = useOpenPostAddStore();
-  const postId = useSearchParams().get('id');
+  const postId = useSearchParams().get('id') || '';
   const [postList, setPostList] = useState<null | DocumentData>(null);
   const { userAuth } = useUserAuthStore();
+  const router = useRouter();
 
-  const handleOpenWrite = (open: boolean) => {
-    setIsOpen(open);
+  // 포스트 삭제
+  const handleDeletePost = async (postId: string) => {
+    try {
+      await fetchDeletePost(postId);
+      router.push('/home');
+    } catch (e) {
+      console.log(e);
+      alert('포스트 삭제에 실패했습니다. 다시 시도해주세요.');
+    }
   };
 
   useEffect(() => {
@@ -27,7 +37,7 @@ export const PostInfo = () => {
       setPostList(posts);
     };
     getPost();
-  }, [postId]);
+  }, [postId, isOpen]);
 
   if (!postList) return <></>;
 
@@ -51,15 +61,17 @@ export const PostInfo = () => {
           </Button>
         ) : (
           <div className={styles.editBtnWrap}>
-            <Button className="outline">삭제</Button>
-            <Button className="fill" onClick={() => handleOpenWrite(true)}>
+            <Button className="outline" onClick={() => handleDeletePost(postList.id)}>
+              삭제
+            </Button>
+            <Button className="fill" onClick={() => setIsOpen(true)}>
               수정
             </Button>
           </div>
         )}
       </div>
       {isOpen && (
-        <BottomSheet title="포스트 수정하기" left={<Button onClick={() => handleOpenWrite(false)}>취소</Button>}>
+        <BottomSheet title="포스트 수정하기" left={<Button onClick={() => setIsOpen(false)}>취소</Button>}>
           <PostWrite data={postList} />
         </BottomSheet>
       )}
