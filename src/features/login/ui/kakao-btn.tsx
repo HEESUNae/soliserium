@@ -1,25 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
-import Image from 'next/image';
-import styles from './kakao-btn.module.css';
 import { Button } from '@/shared';
-import { getKakaoAuthCode, getKakaoToken } from '../api/kakao-login';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useUserAuthStore } from '@/entities';
+import Image from 'next/image';
+import { useEffect } from 'react';
+import { getKakaoAuthCode } from '../api/kakao-login';
+import { useKakaoLogin } from '../model/kakao-login';
+import styles from './kakao-btn.module.css';
 
 export const KakaoBtn = () => {
-  const code = useSearchParams().get('code') || '';
-  const { setUserAuth } = useUserAuthStore();
-  const router = useRouter();
-
-  const handleUserAuth = async () => {
-    if (code) {
-      const data = await getKakaoToken(code);
-      setUserAuth(data);
-      router.push('/home');
-    }
-  };
+  const { handleUserAuth } = useKakaoLogin();
 
   useEffect(() => {
     handleUserAuth();

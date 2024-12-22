@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Button } from '../../shared/ui/button';
+import { Button } from '@/shared';
 
 interface BackBtnProps {
   onClick?: () => void | string;

@@ -1,10 +1,7 @@
 'use client';
 
-import { PostListType, fetchGetAllPost, useUserAuthStore } from '@/entities';
-import { useOpenPostAddStore } from '@/features';
+import { PostListType, useGetAllPost } from '@/entities';
 import { Tab } from '@/widgets';
-import { DocumentData } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
 import { PostItem } from './post-item';
 import styles from './post-list.module.css';
 
@@ -14,24 +11,7 @@ const tabBtns = [
 ];
 
 export const PostList = () => {
-  const [allPostList, setAllPostList] = useState<null | DocumentData>(null);
-  const [myPostList, setMyPostList] = useState<null | DocumentData>(null);
-  const { isOpen } = useOpenPostAddStore();
-  const { userAuth } = useUserAuthStore();
-
-  // 리스트 표출
-  useEffect(() => {
-    const getPostList = async () => {
-      const posts = await fetchGetAllPost();
-      if (posts) {
-        setAllPostList(posts);
-
-        const myPosts = posts.filter((item: DocumentData) => item.uid === userAuth.uid);
-        setMyPostList(myPosts);
-      }
-    };
-    getPostList();
-  }, [isOpen, userAuth]);
+  const { allPostList, myPostList } = useGetAllPost();
 
   if (!allPostList) return <></>;
 

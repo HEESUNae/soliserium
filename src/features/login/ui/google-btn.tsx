@@ -4,7 +4,7 @@ import { Button } from '@/shared';
 import { Loading } from '@/widgets/loading';
 import Image from 'next/image';
 import styles from './google-btn.module.css';
-import { useGoogleAuth } from '../hooks/google-auth';
+import { useGoogleAuth } from '../model/google-login';
 
 export const GoogleBtn = () => {
   const { isLoading, googleLogin } = useGoogleAuth();

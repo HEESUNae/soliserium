@@ -1,17 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { DocumentData } from 'firebase/firestore';
 import styles from './page.module.css';
 import { BottomSheet, ProfilePhoto } from '@/widgets';
 import { Button, getDayjsTime } from '@/shared';
-import { fetchGetPost, useUserAuthStore } from '@/entities';
-import { PostWrite } from '@/features/post/ui/post-write';
-import { useOpenPostAddStore } from '@/features';
-import { fetchDeletePost } from '@/entities/post/api/delete-post';
-import { useRouter } from 'next/navigation';
+import { fetchGetPost, useUserAuthStore, fetchDeletePost } from '@/entities';
+import { PostWrite, useOpenPostAddStore } from '@/features';
 
 export const PostInfo = () => {
   const { isOpen, setIsOpen } = useOpenPostAddStore();

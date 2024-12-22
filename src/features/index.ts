@@ -8,5 +8,8 @@ export { Logout } from './logout/ui/logout';
 
 export { PostBtn } from './post/ui/post-btn';
 export { PostAdd } from './post/ui/post-add';
+export { PostWrite } from './post/ui/post-write';
 
 export { useOpenPostAddStore } from './post/model/open-post-add-store';
+
+export { FindPwForm } from './find-pw/ui/find-pw-form';

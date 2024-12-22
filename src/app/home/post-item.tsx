@@ -1,9 +1,8 @@
 'use client';
 
 import styles from './post-item.module.css';
-import { useRouter } from 'next/navigation';
 import { getDayjsTime } from '@/shared';
-import { PostListType } from '@/entities';
+import { PostListType, useGetPost } from '@/entities';
 import { ProfilePhoto } from '@/widgets';
 
 interface PostListProps {
@@ -11,11 +10,7 @@ interface PostListProps {
 }
 
 export const PostItem = ({ data }: PostListProps) => {
-  const router = useRouter();
-
-  const handlePost = (id: string) => {
-    router.push(`/post?id=${id}`);
-  };
+  const { handlePost } = useGetPost();
 
   return (
     <li className={styles.postList} key={data.id} onClick={() => handlePost(data.id!)}>
