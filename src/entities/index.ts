@@ -12,4 +12,4 @@ export { fetchDeletePost } from './post/api/delete-post';
 
 export { usePostWrite } from './post/model/add-post';
 export { useGetPost } from './post/model/get-post';
-export { useGetAllPost } from './post/model/get-all-post';
+// export { useGetAllPost } from './post/model/get-all-post';

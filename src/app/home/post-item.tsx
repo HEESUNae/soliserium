@@ -2,15 +2,21 @@
 
 import styles from './post-item.module.css';
 import { getDayjsTime } from '@/shared';
-import { PostListType, useGetPost } from '@/entities';
 import { ProfilePhoto } from '@/widgets';
+import { DocumentData } from 'firebase/firestore';
+import { useRouter } from 'next/navigation';
 
 interface PostListProps {
-  data: PostListType;
+  data: DocumentData;
 }
 
 export const PostItem = ({ data }: PostListProps) => {
-  const { handlePost } = useGetPost();
+  const router = useRouter();
+
+  // 선택한 포스트로 이동
+  const handlePost = (id: string) => {
+    router.push(`/post?id=${id}`);
+  };
 
   return (
     <li className={styles.postList} key={data.id} onClick={() => handlePost(data.id!)}>

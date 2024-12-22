@@ -1,17 +1,17 @@
-'use client';
-
-import { PostListType, useGetAllPost } from '@/entities';
+import { fetchGetAllPost } from '@/entities';
 import { Tab } from '@/widgets';
 import { PostItem } from './post-item';
 import styles from './post-list.module.css';
+import { DocumentData } from 'firebase/firestore';
+import { MyPostList } from './my-post';
 
 const tabBtns = [
   { id: 1, title: '전체 고민' },
   { id: 2, title: '내가 작성한 고민' },
 ];
 
-export const PostList = () => {
-  const { allPostList, myPostList } = useGetAllPost();
+export const PostList = async () => {
+  const allPostList = await fetchGetAllPost();
 
   if (!allPostList) return <></>;
 
@@ -22,7 +22,7 @@ export const PostList = () => {
           {allPostList?.length ? (
             <div className={`${styles.listWrap} listWrap`}>
               <ul>
-                {allPostList?.map((list: PostListType) => (
+                {allPostList?.map((list: DocumentData) => (
                   <PostItem data={list} key={list.id} />
                 ))}
               </ul>
@@ -30,17 +30,7 @@ export const PostList = () => {
           ) : (
             <NotData />
           )}
-          {myPostList?.length ? (
-            <div className={`${styles.listWrap} listWrap`}>
-              <ul>
-                {myPostList.map((list: PostListType) => (
-                  <PostItem data={list} key={list.id} />
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <NotData />
-          )}
+          <MyPostList data={allPostList} />
         </>
       </Tab>
     </>

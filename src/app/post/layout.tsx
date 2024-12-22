@@ -1,7 +1,13 @@
+'use client';
+
 import { BackBtn, Header, Logo } from '@/widgets';
 import { ReactNode } from 'react';
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <Header>
