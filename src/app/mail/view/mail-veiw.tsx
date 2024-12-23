@@ -2,19 +2,21 @@
 
 import styles from './mail-view.module.css';
 import { useUserAuthStore } from '@/entities';
+import { fetchDeleteMail } from '@/entities/mail/api/delete-mail';
 import { fetchGetMail } from '@/entities/mail/api/get-mail';
 import { Button, getDayjsTime } from '@/shared';
 import { ProfilePhoto } from '@/widgets';
 import { DocumentData } from 'firebase/firestore';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export const MailView = () => {
   const mailId = useSearchParams().get('id') || '';
   const [mailList, setMailList] = useState<null | DocumentData>(null);
   const { userAuth } = useUserAuthStore();
+  const router = useRouter();
 
+  // 선택한 메일 내용 가져오기
   useEffect(() => {
     const getMail = async () => {
       if (mailId === 'master') {
@@ -38,6 +40,17 @@ export const MailView = () => {
     getMail();
   }, [mailId, userAuth]);
 
+  // 메일 삭제
+  const handleDeleteMail = async () => {
+    try {
+      await fetchDeleteMail(mailId);
+      router.push('/mail');
+    } catch (e) {
+      alert('메일 삭제에 실패했습니다. 디시 시도해주세요.');
+      console.log(e);
+    }
+  };
+
   if (!mailList) return <></>;
 
   return (
@@ -54,9 +67,13 @@ export const MailView = () => {
         </div>
       </div>
       <div className={styles.bottomBtns}>
-        {mailId !== 'master' && <Button className="outline">삭제</Button>}
-        <Button className="fill">
-          <Link href={'/mail'}>목록으로</Link>
+        {mailId !== 'master' && !mailList.mailCheck && (
+          <Button className="outline" onClick={handleDeleteMail}>
+            삭제
+          </Button>
+        )}
+        <Button className="fill" onClick={() => router.back()}>
+          목록으로
         </Button>
       </div>
     </>

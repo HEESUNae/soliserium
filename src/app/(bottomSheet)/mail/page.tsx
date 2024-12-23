@@ -10,6 +10,7 @@ import { useUserAuthStore } from '@/entities';
 import { useRouter } from 'next/navigation';
 import { NotData } from '@/widgets/not-data';
 import { Button } from '@/shared';
+import Link from 'next/link';
 
 const tabBtns = [
   { id: 1, title: '받은 우편함' },
@@ -93,7 +94,11 @@ export default function MailPage() {
                 보낸 메일이 없습니다.
                 <br />
                 사람들에게 메일을 보내 조언을 해보세요.
-                <Button className="fill">홈으로 조언하러 가기</Button>
+                <Button className="fill">
+                  <Link href="/home" replace>
+                    홈으로 조언하러 가기
+                  </Link>
+                </Button>
               </NotData>
             )}
           </ul>

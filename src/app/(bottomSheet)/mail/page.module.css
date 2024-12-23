@@ -12,11 +12,6 @@
   font-size: 1.3rem;
   height: 4rem;
 }
-@media (min-width: 700px) {
-  .listWrap {
-    height: calc(66.7rem - 14.5rem);
-  }
-}
 
 .mailList {
   padding: 1.6rem;
@@ -40,4 +35,10 @@
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 0.8rem;
+}
+
+@media (min-width: 700px) {
+  .listWrap {
+    height: calc(66.7rem - 14.5rem);
+  }
 }
