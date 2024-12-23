@@ -5,12 +5,13 @@ import { DocumentData } from 'firebase/firestore';
 import styles from './post-write.module.css';
 
 interface PostWriteProps {
-  data?: DocumentData;
+  postData?: DocumentData;
+  mode?: string;
   onClick?: () => void;
 }
 
-export const PostWrite = ({ data }: PostWriteProps) => {
-  const { handleTextareaValue, handleUpdatePost, handleAddPost } = usePostWrite(data || {});
+export const PostWrite = ({ postData = {}, mode = 'add' }: PostWriteProps) => {
+  const { handleTextareaValue, handleUpdatePost, handleAddPost } = usePostWrite(postData, mode);
   const { userAuth } = useUserAuthStore();
 
   return (
@@ -19,12 +20,16 @@ export const PostWrite = ({ data }: PostWriteProps) => {
         <ProfilePhoto src={userAuth.photoURL ?? ''} alt="" width={40} height={40} />
         <div className={styles.inputWrap}>
           <p className={styles.userName}>{userAuth.name}</p>
-          <Textarea placeholder="여기에 고민을 적어보세요" onChange={handleTextareaValue} value={(data && data.content) || ''} />
+          <Textarea
+            placeholder={mode === 'send' ? '여기에 조언을 적어보세요' : '여기에 고민을 적어보세요'}
+            onChange={handleTextareaValue}
+            value={(postData && mode === 'update' && postData.content) || ''}
+          />
         </div>
       </div>
       <div className={styles.buttonBtnWrap}>
-        <Button className="fill" onClick={data ? handleUpdatePost : handleAddPost}>
-          등록하기
+        <Button className="fill" onClick={mode !== 'add' ? handleUpdatePost : handleAddPost}>
+          {mode === 'send' ? '보내기' : '등록하기'}
         </Button>
       </div>
     </>

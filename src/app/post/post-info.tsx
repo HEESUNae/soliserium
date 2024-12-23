@@ -14,6 +14,7 @@ export const PostInfo = () => {
   const { isOpen, setIsOpen } = useOpenPostAddStore();
   const postId = useSearchParams().get('id') || '';
   const [postList, setPostList] = useState<null | DocumentData>(null);
+  const [modelMode, setModelMode] = useState('');
   const { userAuth } = useUserAuthStore();
   const router = useRouter();
 
@@ -26,6 +27,12 @@ export const PostInfo = () => {
       console.log(e);
       alert('포스트 삭제에 실패했습니다. 다시 시도해주세요.');
     }
+  };
+
+  // 우편 보내기
+  const handleOpenModal = async (mode: string) => {
+    setIsOpen(true);
+    setModelMode(mode);
   };
 
   useEffect(() => {
@@ -52,7 +59,7 @@ export const PostInfo = () => {
       </div>
       <div className={styles.bottomBtns}>
         {postList.uid !== userAuth.uid ? (
-          <Button className="fill">
+          <Button className="fill" onClick={() => handleOpenModal('send')}>
             <Image src="/icons/mail/mail-close.svg" alt="" width={20} height={20} />
             우편 보내기
           </Button>
@@ -61,15 +68,15 @@ export const PostInfo = () => {
             <Button className="outline" onClick={() => handleDeletePost(postList.id)}>
               삭제
             </Button>
-            <Button className="fill" onClick={() => setIsOpen(true)}>
+            <Button className="fill" onClick={() => handleOpenModal('update')}>
               수정
             </Button>
           </div>
         )}
       </div>
       {isOpen && (
-        <BottomSheet title="포스트 수정하기" left={<Button onClick={() => setIsOpen(false)}>취소</Button>}>
-          <PostWrite data={postList} />
+        <BottomSheet title={modelMode === 'update' ? '포스트 수정하기' : '메일 보내기'} left={<Button onClick={() => setIsOpen(false)}>취소</Button>}>
+          <PostWrite postData={postList} mode={modelMode} />
         </BottomSheet>
       )}
     </>

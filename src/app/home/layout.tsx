@@ -18,13 +18,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <Header className="between">
         <Logo />
         <div className={styles.rightBtnWrap}>
-          <Logout />
           <Button>
             <Image src="/icons/nav/alram.svg" alt="" width={24} height={24} />
           </Button>
-          <Button>
-            <Image src="/icons/nav/setting.svg" alt="" width={24} height={24} />
-          </Button>
+          <Logout />
         </div>
       </Header>
       {children}

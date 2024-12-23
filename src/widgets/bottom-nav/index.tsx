@@ -46,10 +46,10 @@ const bottomNavs = [
     href: null,
   },
   {
-    title: '상담',
-    name: 'robot',
+    title: '우편함',
+    name: 'mail',
     size: 22,
-    href: '/chat',
+    href: '/mail',
   },
   {
     title: '투표',

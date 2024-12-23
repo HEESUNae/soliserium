@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { fetchUpdatePost } from '@/entities/post/api/update-post';
 import { DocumentData } from 'firebase/firestore';
 
-export const usePostWrite = (data: DocumentData) => {
+export const usePostWrite = (postData: DocumentData, mode: string) => {
   const { setIsOpen } = useOpenPostAddStore();
   const { userAuth } = useUserAuthStore();
   const [textareaValue, setTextareaValue] = useState<string>('');
@@ -22,14 +22,14 @@ export const usePostWrite = (data: DocumentData) => {
     const now = dayjs();
     const createTimestemp = dayjs(now).valueOf();
     try {
-      const postData = {
+      const data = {
         uid: userAuth.uid,
         name: userAuth.name,
         photoUrl: userAuth.photoURL,
         createAt: createTimestemp,
         content: textareaValue,
       };
-      await fetchAddPost(postData);
+      await fetchAddPost(data, 'posts');
       setIsOpen(false);
     } catch (e) {
       alert('포스트 작성에 실패했습니다. 다시 시도해주세요.');
@@ -41,10 +41,25 @@ export const usePostWrite = (data: DocumentData) => {
   const handleUpdatePost = async () => {
     if (!textareaValue) return alert('내용을 작성해주세요');
     try {
-      if (data) {
-        await fetchUpdatePost(data.id, textareaValue);
-        setIsOpen(false);
+      if (mode === 'update') {
+        await fetchUpdatePost(postData.id, textareaValue);
       }
+      if (mode === 'send') {
+        const now = dayjs();
+        const createTimestemp = dayjs(now).valueOf();
+        const data = {
+          sendUserUid: userAuth.uid,
+          sendUserName: userAuth.name,
+          sendPhotoUrl: userAuth.photoURL,
+          receiveUserUid: postData.uid,
+          receiveUserName: postData.name,
+          content: textareaValue,
+          createAt: createTimestemp,
+          mailCheck: false,
+        };
+        await fetchAddPost(data, 'mail');
+      }
+      setIsOpen(false);
     } catch (e) {
       alert('포스트 수정에 실패했습니다. 다시 시도해주세요.');
       console.log(e);

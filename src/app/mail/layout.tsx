@@ -3,11 +3,11 @@
 import { BackBtn, Header, Logo } from '@/widgets';
 import { ReactNode } from 'react';
 
-interface PostLayoutProps {
+interface MailLayoutProps {
   children: ReactNode;
 }
 
-export default function PostLayout({ children }: PostLayoutProps) {
+export default function MailLayout({ children }: MailLayoutProps) {
   return (
     <>
       <Header>

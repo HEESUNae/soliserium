@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { UserInfoType } from '../types/use-info-type';
+import { UserInfoType } from '@/shared';
 
 interface AuthState {
   userAuth: UserInfoType;

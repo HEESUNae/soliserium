@@ -1,4 +1,5 @@
-import { UserInfoType, setCookie } from '@/entities';
+import { setCookie } from '@/entities';
+import { UserInfoType } from '@/shared';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 

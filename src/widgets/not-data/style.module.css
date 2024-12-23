@@ -1,0 +1,12 @@
+.notData {
+  min-width: 100vw;
+  margin-top: 5rem;
+  text-align: center;
+  color: #666;
+}
+
+@media (min-width: 700px) {
+  .notData {
+    min-width: 37.5rem;
+  }
+}

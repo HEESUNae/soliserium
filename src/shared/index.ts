@@ -12,3 +12,6 @@ export { checkRegex } from './model/regex';
 
 // lib
 export { getDayjsTime } from './lib/dayjs';
+
+// types
+export { type UserInfoType } from './types/user';
