@@ -14,7 +14,7 @@ export const PostInfo = () => {
   const { isOpen, setIsOpen } = useOpenPostAddStore();
   const postId = useSearchParams().get('id') || '';
   const [postList, setPostList] = useState<null | DocumentData>(null);
-  const [modelMode, setModelMode] = useState('');
+  const [mode, setMode] = useState('');
   const { userAuth } = useUserAuthStore();
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export const PostInfo = () => {
   // 우편 보내기
   const handleOpenModal = async (mode: string) => {
     setIsOpen(true);
-    setModelMode(mode);
+    setMode(mode);
   };
 
   useEffect(() => {
@@ -75,8 +75,8 @@ export const PostInfo = () => {
         )}
       </div>
       {isOpen && (
-        <BottomSheet title={modelMode === 'update' ? '포스트 수정하기' : '메일 보내기'} left={<Button onClick={() => setIsOpen(false)}>취소</Button>}>
-          <PostWrite postData={postList} mode={modelMode} />
+        <BottomSheet title={mode === 'update' ? '포스트 수정하기' : '메일 보내기'} left={<Button onClick={() => setIsOpen(false)}>취소</Button>}>
+          <PostWrite postData={postList} mode={mode} />
         </BottomSheet>
       )}
     </>

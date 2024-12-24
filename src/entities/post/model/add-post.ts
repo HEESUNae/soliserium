@@ -58,6 +58,7 @@ export const usePostWrite = (postData: DocumentData, mode: string) => {
           mailCheck: false,
         };
         await fetchAddPost(data, 'mail');
+        alert('우편이 상대방에게 전송되었습니다.');
       }
       setIsOpen(false);
     } catch (e) {

@@ -50,7 +50,6 @@ export const MailView = () => {
       console.log(e);
     }
   };
-
   if (!mailList) return <></>;
 
   return (
@@ -67,13 +66,11 @@ export const MailView = () => {
         </div>
       </div>
       <div className={styles.bottomBtns}>
-        {mailId !== 'master' && !mailList.mailCheck && (
-          <Button className="outline" onClick={handleDeleteMail}>
-            삭제
-          </Button>
-        )}
+        <Button className="outline" onClick={handleDeleteMail}>
+          삭제
+        </Button>
         <Button className="fill" onClick={() => router.back()}>
-          목록으로
+          목록
         </Button>
       </div>
     </>
