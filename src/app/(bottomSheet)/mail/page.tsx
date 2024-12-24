@@ -64,7 +64,7 @@ export default function MailPage() {
               <li key={item.id}>
                 <div className={styles.mailList} onClick={() => handleOpenMail(item.id)}>
                   <div className={styles.titleWrap}>
-                    <Image src={`/icons/mail/mail-${item.mailCheck === 'true' ? 'open' : 'close'}.svg`} alt="" width={20} height={20} />
+                    <Image src={`/icons/mail/mail-${item.mailCheck ? 'open' : 'close'}.svg`} alt="" width={20} height={20} />
                     <h3>{item.sendUserName}</h3>
                   </div>
                   <p>{item.content}</p>
