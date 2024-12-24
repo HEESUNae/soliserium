@@ -1,6 +1,11 @@
-import axios from 'axios';
-
 export const fetchLucky = async () => {
-  const res = await axios.get('https://korean-advice-open-api.vercel.app/api/advice');
-  return res.data;
+  const URL = 'https://aztro.sameerkumar.website/?sign=aries&day=today';
+  fetch(URL, {
+    method: 'POST',
+  })
+    .then((response) => response.json())
+    .then((json) => {
+      const date = json.current_date;
+      console.log(date);
+    });
 };

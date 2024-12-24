@@ -43,6 +43,7 @@ export const getKakaoToken = async (code: string): Promise<UserInfoType> => {
       email: user.email,
       photoURL: user.picture,
       providerId: 'kakao',
+      isVote: false,
     };
     return userData;
   } catch (e) {

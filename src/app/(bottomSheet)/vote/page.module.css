@@ -28,9 +28,11 @@
 .question {
   display: grid;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
-
+.question h2 {
+  margin-bottom: 0.4rem;
+}
 @media (min-width: 700px) {
   .main {
     height: calc(66.7rem - 10.5rem);

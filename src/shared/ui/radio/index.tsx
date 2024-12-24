@@ -7,12 +7,21 @@ interface RadioProps {
   defaultChecked?: boolean;
   children: ReactNode;
   disabled?: boolean;
+  onChange?: (name: string, value: string) => void;
 }
 
-export const Radio = ({ name, value, defaultChecked, children, ...rest }: RadioProps) => {
+export const Radio = ({ name, value, defaultChecked, onChange, children, ...rest }: RadioProps) => {
   return (
     <div className={styles.radio}>
-      <input type="radio" id={`${name}-${value}`} value={value} name={name} defaultChecked={defaultChecked} {...rest} />
+      <input
+        type="radio"
+        id={`${name}-${value}`}
+        value={value}
+        name={name}
+        defaultChecked={defaultChecked}
+        onChange={(e) => onChange?.(name, e.target.value)}
+        {...rest}
+      />
       <label htmlFor={`${name}-${value}`}>{children}</label>
     </div>
   );

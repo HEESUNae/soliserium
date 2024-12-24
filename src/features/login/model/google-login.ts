@@ -39,6 +39,7 @@ export const useGoogleAuth = () => {
             email: user.email!,
             photoURL: user.photoURL!,
             providerId: 'google',
+            isVote: false,
           };
           setUserAuth(userData);
           router.push('/home');

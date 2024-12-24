@@ -38,6 +38,7 @@ export const updateUserInfo = async (user: User, userName: string, userProfile: 
     name: userName,
     photoURL: profileImg.url,
     providerId: user.providerId,
+    isVote: false,
   });
 
   // 가입 메세지 발송

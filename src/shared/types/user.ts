@@ -4,4 +4,5 @@ export interface UserInfoType {
   photoURL?: string;
   providerId?: string;
   uid?: string | number;
+  isVote?: boolean;
 }
