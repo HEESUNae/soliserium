@@ -21,7 +21,7 @@ export const PostInfo = () => {
   // 포스트 삭제
   const handleDeletePost = async (postId: string) => {
     try {
-      let deleteCheck = confirm('정말 삭제하시겠습니까?');
+      const deleteCheck = confirm('정말 삭제하시겠습니까?');
       if (deleteCheck) {
         await fetchDeletePost(postId);
         router.push('/home');

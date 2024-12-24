@@ -43,7 +43,7 @@ export const MailView = () => {
   // 메일 삭제
   const handleDeleteMail = async () => {
     try {
-      let deleteCheck = confirm('정말 삭제하시겠습니까?');
+      const deleteCheck = confirm('정말 삭제하시겠습니까?');
       if (deleteCheck) {
         await fetchDeleteMail(mailId);
         router.push('/mail');
