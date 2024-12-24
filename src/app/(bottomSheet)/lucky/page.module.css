@@ -1,11 +1,24 @@
-.luckyBox {
+.main {
+  padding: 1.6rem;
+}
+.sayingBoxWrap h2 {
+  margin-bottom: 1rem;
+}
+.sayingBox {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.6rem;
-  background-color: #f6f6f6;
+  gap: 0.4rem;
+  padding: 1.2rem;
+  border: 0.1rem solid var(--color-gray);
+  border-radius: 0.8rem;
 }
-.luckyBox .authorProfile {
+.sayingBox .authorProfile {
   font-size: 1.2rem;
   color: #666;
+}
+.luckyWrap {
+  margin-top: 2rem;
+}
+.luckyBoxWrap h2 {
+  margin-bottom: 1rem;
 }
