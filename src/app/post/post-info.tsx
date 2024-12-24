@@ -21,8 +21,11 @@ export const PostInfo = () => {
   // 포스트 삭제
   const handleDeletePost = async (postId: string) => {
     try {
-      await fetchDeletePost(postId);
-      router.push('/home');
+      let deleteCheck = confirm('정말 삭제하시겠습니까?');
+      if (deleteCheck) {
+        await fetchDeletePost(postId);
+        router.push('/home');
+      }
     } catch (e) {
       console.log(e);
       alert('포스트 삭제에 실패했습니다. 다시 시도해주세요.');

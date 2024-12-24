@@ -6,11 +6,14 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { fetchUpdatePost } from '@/entities/post/api/update-post';
 import { DocumentData } from 'firebase/firestore';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const usePostWrite = (postData: DocumentData, mode: string) => {
   const { setIsOpen } = useOpenPostAddStore();
   const { userAuth } = useUserAuthStore();
   const [textareaValue, setTextareaValue] = useState<string>('');
+  const router = useRouter();
+  const path = usePathname();
 
   const handleTextareaValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextareaValue(e.target.value);
@@ -31,6 +34,7 @@ export const usePostWrite = (postData: DocumentData, mode: string) => {
       };
       await fetchAddPost(data, 'posts');
       setIsOpen(false);
+      if (path !== '/home') router.push('/home');
     } catch (e) {
       alert('포스트 작성에 실패했습니다. 다시 시도해주세요.');
       console.log(e);

@@ -18,10 +18,6 @@
   border-bottom: 0.1rem solid #eee;
   padding: 1.2rem;
 }
-.titleWrap img {
-  width: 3rem;
-  height: 3rem;
-}
 .titleWrap .date {
   color: #666;
   margin-left: auto;

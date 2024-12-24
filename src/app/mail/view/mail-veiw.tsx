@@ -43,8 +43,11 @@ export const MailView = () => {
   // 메일 삭제
   const handleDeleteMail = async () => {
     try {
-      await fetchDeleteMail(mailId);
-      router.push('/mail');
+      let deleteCheck = confirm('정말 삭제하시겠습니까?');
+      if (deleteCheck) {
+        await fetchDeleteMail(mailId);
+        router.push('/mail');
+      }
     } catch (e) {
       alert('메일 삭제에 실패했습니다. 디시 시도해주세요.');
       console.log(e);
@@ -66,9 +69,11 @@ export const MailView = () => {
         </div>
       </div>
       <div className={styles.bottomBtns}>
-        <Button className="outline" onClick={handleDeleteMail}>
-          삭제
-        </Button>
+        {mailId !== 'master' && (
+          <Button className="outline" onClick={handleDeleteMail}>
+            삭제
+          </Button>
+        )}
         <Button className="fill" onClick={() => router.back()}>
           목록
         </Button>
