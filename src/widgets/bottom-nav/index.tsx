@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './style.module.css';
-import { useOpenPostAddStore } from '@/features';
+import { usePostModelStore } from '@/features';
 
 export const BottomNav = () => {
-  const { setIsOpen } = useOpenPostAddStore();
+  const { setIsOpen } = usePostModelStore();
   const path = usePathname();
 
   return (
@@ -34,10 +34,10 @@ const bottomNavs = [
     href: '/home',
   },
   {
-    title: '운세',
-    name: 'lucky',
+    title: '뮤직',
+    name: 'music',
     size: 22,
-    href: '/lucky',
+    href: '/music',
   },
   {
     title: null,

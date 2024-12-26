@@ -1,14 +1,14 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { DocumentData } from 'firebase/firestore';
 import styles from './mail-view.module.css';
+import { fetchDeleteMail } from '../api/delete-mail';
+import { fetchGetMail } from '../api/get-mail';
 import { useUserAuthStore } from '@/entities';
-import { fetchDeleteMail } from '@/entities/mail/api/delete-mail';
-import { fetchGetMail } from '@/entities/mail/api/get-mail';
 import { Button, getDayjsTime } from '@/shared';
 import { ProfilePhoto } from '@/widgets';
-import { DocumentData } from 'firebase/firestore';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export const MailView = () => {
   const mailId = useSearchParams().get('id') || '';

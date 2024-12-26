@@ -8,7 +8,7 @@ import { Logout, PostAdd } from '@/features';
 import { BottomNav, Header, Logo } from '@/widgets';
 import { useAlramStore } from '@/shared/model/alram-store';
 import Link from 'next/link';
-import { fetchAllMail } from '@/entities/mail/api/get-all-mail';
+import { fetchAllMail } from '@/features/mail/api/get-all-mail';
 import { DocumentData } from 'firebase/firestore';
 import { useUserAuthStore } from '@/entities';
 

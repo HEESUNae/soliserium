@@ -2,11 +2,11 @@
 
 import { Button } from '@/shared';
 import { BottomSheet } from '@/widgets';
-import { useOpenPostAddStore } from '../model/open-post-add-store';
+import { usePostModelStore } from '../model/post-model-store';
 import { PostWrite } from './post-write';
 
 export const PostAdd = () => {
-  const { isOpen, setIsOpen } = useOpenPostAddStore();
+  const { isOpen, setIsOpen } = usePostModelStore();
 
   return (
     <>

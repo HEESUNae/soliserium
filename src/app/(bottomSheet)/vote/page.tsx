@@ -2,13 +2,11 @@
 
 import { Button } from '@/shared';
 import styles from './page.module.css';
-import { Radio } from '@/shared/ui/radio';
 import React, { useEffect, useState } from 'react';
-import { fetchUpdateVote } from '@/entities/vote/api/update-vote';
-import { fetchGetAllVote } from '@/entities/vote/api/get-vote';
 import { DocumentData } from 'firebase/firestore';
-import { useUserAuthStore } from '@/entities';
-import { fetchUpdateUser } from '@/entities/auth/api/update-user';
+import { useUserAuthStore, fetchUpdateUser } from '@/entities';
+import { Radio } from '@/shared';
+import { fetchUpdateVote, fetchGetAllVote } from '@/features';
 
 export default function VotePage() {
   const [voteList, setVoteList] = useState<null | DocumentData>(null);
@@ -91,7 +89,7 @@ export default function VotePage() {
             {vote1Options.map((option, idx) => (
               <Radio key={idx} name="vote1" value={option.value} onChange={handleVoteChange} disabled={userAuth.isVote}>
                 <p>{option.text}</p>
-                <p>{voteList[0]?.[option.value]}</p>
+                {userAuth.isVote && <p>{voteList[0]?.[option.value]}</p>}
               </Radio>
             ))}
           </div>
@@ -100,7 +98,7 @@ export default function VotePage() {
             {vote2Options.map((option, idx) => (
               <Radio key={idx} name="vote2" value={option.value} onChange={handleVoteChange} disabled={userAuth.isVote}>
                 <p>{option.text}</p>
-                <p>{voteList[1]?.[option.value]}</p>
+                {userAuth.isVote && <p>{voteList[1]?.[option.value]}</p>}
               </Radio>
             ))}
           </div>
@@ -109,7 +107,7 @@ export default function VotePage() {
             {vote3Options.map((option, idx) => (
               <Radio key={idx} name="vote3" value={option.value} onChange={handleVoteChange} disabled={userAuth.isVote}>
                 <p>{option.text}</p>
-                <p>{voteList[2]?.[option.value]}</p>
+                {userAuth.isVote && <p>{voteList[2]?.[option.value]}</p>}
               </Radio>
             ))}
           </div>

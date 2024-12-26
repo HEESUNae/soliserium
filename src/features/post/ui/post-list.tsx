@@ -1,12 +1,13 @@
 'use client';
-import { fetchGetAllPost, useUserAuthStore } from '@/entities';
-import { Tab } from '@/widgets';
-import { PostItem } from './post-item';
+
+import { useUserAuthStore } from '@/entities';
 import styles from './post-list.module.css';
+import { Tab, NotData } from '@/widgets';
+import { PostItem } from './post-item';
 import { DocumentData } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { useOpenPostAddStore } from '@/features';
-import { NotData } from '@/widgets/not-data';
+import { usePostModelStore } from '@/features';
+import { fetchGetAllPost } from '../api/get-all-posts';
 
 const tabBtns = [
   { id: 1, title: '전체 고민' },
@@ -17,7 +18,7 @@ export const PostList = () => {
   const [allPostList, setAllPostList] = useState<null | DocumentData>(null);
   const [myPosts, setMyPosts] = useState<null | DocumentData>(null);
   const { userAuth } = useUserAuthStore();
-  const { isOpen } = useOpenPostAddStore();
+  const { isOpen } = usePostModelStore();
 
   useEffect(() => {
     const getAllpost = async () => {

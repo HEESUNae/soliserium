@@ -1,5 +1,10 @@
 .main {
   padding: 1.6rem;
+  height: calc(100vh - 10.5rem);
+  overflow-y: auto;
+}
+.main::-webkit-scrollbar {
+  width: 0;
 }
 .sayingBoxWrap h2 {
   margin-bottom: 1rem;
@@ -16,9 +21,16 @@
   font-size: 1.2rem;
   color: #666;
 }
-.luckyWrap {
+.musicWrap {
   margin-top: 2rem;
 }
-.luckyBoxWrap h2 {
-  margin-bottom: 1rem;
+.musicBoxWrap {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .main {
+    height: calc(66.7rem - 10.5rem);
+  }
 }

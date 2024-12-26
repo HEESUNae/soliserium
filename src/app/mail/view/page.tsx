@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { MailView } from './mail-veiw';
+import { MailView } from '../../../features/mail/ui/mail-veiw';
 
 export default function MailPage() {
   return (

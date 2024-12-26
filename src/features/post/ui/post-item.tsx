@@ -19,7 +19,7 @@ export const PostItem = ({ data }: PostListProps) => {
   };
 
   return (
-    <li className={styles.postList} key={data.id} onClick={() => handlePost(data.id!)}>
+    <li className={styles.postList} key={data.id} onClick={() => handlePost(data.id)}>
       <figure>
         <ProfilePhoto src={data.photoUrl} alt="" width={36} height={36} />
       </figure>

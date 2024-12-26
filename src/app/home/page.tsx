@@ -1,6 +1,6 @@
 import { PostBtn } from '@/features';
 import styles from './page.module.css';
-import { PostList } from './post-list';
+import { PostList } from '@/features';
 
 export default function MainPage() {
   return (

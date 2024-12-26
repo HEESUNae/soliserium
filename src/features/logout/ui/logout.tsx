@@ -1,11 +1,18 @@
 'use client';
 
+import { setCookie, useUserAuthStore } from '@/entities';
 import { Button } from '@/shared';
-import { useUserLogout } from '../model/logout';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export const Logout = () => {
-  const { handleLogout } = useUserLogout();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    useUserAuthStore.persist.clearStorage();
+    setCookie('accessToken', '', 0);
+    router.push('/login');
+  };
 
   return (
     <Button onClick={handleLogout}>

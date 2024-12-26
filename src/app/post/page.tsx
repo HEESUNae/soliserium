@@ -1,8 +1,6 @@
-'use client';
-
 import { Suspense } from 'react';
 import styles from './page.module.css';
-import { PostInfo } from './post-info';
+import { PostInfo } from '@/features';
 
 export default function PostViewPage() {
   return (

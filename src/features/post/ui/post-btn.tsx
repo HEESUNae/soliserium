@@ -3,11 +3,11 @@
 import styles from './post-btn.module.css';
 import { useUserAuthStore } from '@/entities';
 import { ProfilePhoto } from '@/widgets';
-import { useOpenPostAddStore } from '../model/open-post-add-store';
+import { usePostModelStore } from '../model/post-model-store';
 
 export const PostBtn = () => {
   const { userAuth } = useUserAuthStore();
-  const { setIsOpen } = useOpenPostAddStore();
+  const { setIsOpen } = usePostModelStore();
 
   return (
     <div className={styles.postBtn} onClick={() => setIsOpen(true)}>

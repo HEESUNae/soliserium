@@ -7,3 +7,5 @@ export { ProfilePhoto } from './profile-photo';
 export { BottomSheet } from './bottom-sheet';
 export { BottomNav } from './bottom-nav';
 export { Tab } from './tab';
+export { NotData } from './not-data';
+export { Movie } from './movie';

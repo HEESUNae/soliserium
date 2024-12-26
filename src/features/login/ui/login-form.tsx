@@ -1,14 +1,23 @@
 'use client';
 
-import { Button, Checkbox, Input } from '@/shared';
-import Link from 'next/link';
-import styles from './login-form.module.css';
-import { useIdSaveStore } from '../model/id-save-store';
-import { useEffect, useState } from 'react';
-import { getErrorMessage, useUserAuthStore } from '@/entities';
-import { useRouter } from 'next/navigation';
+import { fetchUserInfo, setCookie, useUserAuthStore } from '@/entities';
+import { Button, Checkbox, Input, auth } from '@/shared';
 import { FirebaseError } from 'firebase/app';
-import { getCheckUser } from '../model/auth-login';
+import { User, signInWithEmailAndPassword } from 'firebase/auth';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useIdSaveStore } from '../model/id-save-store';
+import styles from './login-form.module.css';
+import { getErrorMessage } from '@/features/join/model/join-form';
+
+interface UserType extends User {
+  stsTokenManager: {
+    accessToken: string;
+    expirationTime: number;
+    refreshToken: string;
+  };
+}
 
 export const LoginForm = () => {
   const { savedId, setSavedId } = useIdSaveStore();
@@ -52,6 +61,27 @@ export const LoginForm = () => {
   // 이메일저장 체크박스 핸들러
   const handleCheckboxChange = (checked: boolean) => {
     setIsChecked(checked);
+  };
+
+  // 로그인시 기존 회원인지 체크
+  const getCheckUser = async (userId: string, userPw: string) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, userId, userPw);
+      const user = userCredential.user as UserType;
+
+      // 이메일 인증 안된 계정은 로그인 못함
+      if (!user.emailVerified) {
+        throw new Error('Email not verified');
+      }
+      const accessToken = await user.getIdToken();
+      const userInfo = await fetchUserInfo(user);
+      setCookie('accessToken', accessToken, user.stsTokenManager.expirationTime);
+      return userInfo;
+    } catch (error) {
+      const errorMsg = getErrorMessage(error as string);
+      alert(`${errorMsg}`);
+      console.log('로그인 실패:', error);
+    }
   };
 
   // 페이지 진입시 이메일저장 확인 여부

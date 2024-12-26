@@ -1,7 +1,5 @@
-'use client';
-
-import { BackBtn, Header, Logo } from '@/widgets';
 import { ReactNode } from 'react';
+import { BackBtn, Header, Logo } from '@/widgets';
 
 interface PostLayoutProps {
   children: ReactNode;
